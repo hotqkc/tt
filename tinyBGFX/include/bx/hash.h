@@ -7,7 +7,7 @@
 #define BX_HASH_H_HEADER_GUARD
 
 #include "allocator.h" // isAligned
-#include "string.h" // StringView
+#include "bxstring.h" // StringView
 
 namespace bx
 {

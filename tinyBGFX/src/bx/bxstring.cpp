@@ -7,7 +7,7 @@
 #include <bx/allocator.h>
 #include <bx/hash.h>
 #include <bx/readerwriter.h>
-#include <bx/string.h>
+#include <bx/bxstring.h>
 
 namespace bx
 {

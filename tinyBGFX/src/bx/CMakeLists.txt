@@ -4,26 +4,19 @@ set(PROJECT_NAME tinyBGFX_bx)
 set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/platform.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/macros.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/bx.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/bx.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/bx_p.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/bx.cpp
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/debug.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/debug.cpp
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/string.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/string.inl
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/string.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/bxstring.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/bxstring.cpp
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/allocator.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/allocator.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/allocator.cpp
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/hash.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/hash.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/hash.cpp
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/readerwriter.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/readerwriter.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/endian.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/endian.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/error.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/error.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/filepath.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/filepath.cpp
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/file.h
@@ -31,18 +24,43 @@ set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/platform.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/os.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/os.cpp
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/uint32_t.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/uint32_t.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/config.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/math.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/math.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/math.cpp
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/simd_t.h
+			 )	
+			 
+set(INLINE_SRC
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/bx.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/bxstring.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/allocator.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/hash.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/readerwriter.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/endian.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/error.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/uint32_t.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/math.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/simd128_swizzle.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/simd128_sse.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/simd128_ref.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/simd256_ref.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/simd_ni.inl
-			 )	 
+    )
+source_group("inline" FILES ${INLINE_SRC})
+
+# add platform specific sources
+if(WIN32)
+    set(PLATFORM_SRC
+        ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/compat/msvc/alloca.h
+        ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/compat/msvc/dirent.h
+        ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/compat/msvc/inttypes.h
+        ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/compat/msvc/stdbool.h
+        ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/compat/msvc/pre1600/stdint.h
+    )
+    source_group("msvc" FILES ${PLATFORM_SRC})
+endif()
+
+set(DIR_SRCS ${DIR_SRCS} ${PLATFORM_SRC} ${INLINE_SRC})			 
 
 set(INC_DIR ${CMAKE_ROOT_DIR}/tinyBGFX/include
 			${CMAKE_ROOT_DIR}/tinyBGFX/include/bx

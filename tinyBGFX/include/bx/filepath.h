@@ -7,7 +7,7 @@
 #define BX_FILEPATH_H_HEADER_GUARD
 
 #include "error.h"
-#include "string.h"
+#include "bxstring.h"
 
 BX_ERROR_RESULT(BX_ERROR_ACCESS,        BX_MAKEFOURCC('b', 'x', 0, 0) );
 BX_ERROR_RESULT(BX_ERROR_NOT_DIRECTORY, BX_MAKEFOURCC('b', 'x', 0, 1) );

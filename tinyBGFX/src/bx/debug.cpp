@@ -5,7 +5,7 @@
 
 #include "bx_p.h"
 #include <bx/debug.h>
-#include <bx/string.h>       // isPrint
+#include <bx/bxstring.h>       // isPrint
 #include <bx/readerwriter.h> // WriterI
 #include <inttypes.h>        // PRIx*
 

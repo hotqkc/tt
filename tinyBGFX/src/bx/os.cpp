@@ -4,7 +4,7 @@
  */
 
 #include "bx_p.h"
-#include <bx/string.h>
+#include <bx/bxstring.h>
 #include <bx/os.h>
 #include <bx/uint32_t.h>
 
