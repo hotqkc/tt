@@ -7,4 +7,9 @@ digraph tinybgfx_helloworld {
 	]
 	
 	Hello -> Renderer
+	Renderer -> debug_renderdoc
+	Renderer -> glcontext
+	Renderer -> glimports
+	Renderer -> nvapi
+	Renderer -> dxgi
 }

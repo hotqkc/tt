@@ -44,6 +44,40 @@ set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx/bgfx.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear7.bin.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear7.sc
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/charset.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_d3d.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_d3d11.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_d3d11.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_d3d12.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_d3d12.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_d3d9.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_d3d9.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_gl.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_gl.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_gnm.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_mtl.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_mtl.mm
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_noop.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_nvn.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_vk.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/renderer_vk.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/debug_renderdoc.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/debug_renderdoc.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/glcontext_eagl.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/glcontext_eagl.mm
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/glcontext_egl.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/glcontext_egl.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/glcontext_glx.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/glcontext_glx.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/glcontext_nsgl.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/glcontext_nsgl.mm
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/glcontext_wgl.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/glcontext_wgl.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/glimports.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/nvapi.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/nvapi.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/dxgi.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/dxgi.cpp
 			 )	
 
 set(C99_SRCS
