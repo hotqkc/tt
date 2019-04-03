@@ -1,15 +1,15 @@
 
-set(PROJECT_NAME tinyBGFX)
+set(PROJECT_NAME tinyBGFX_bgfx)
 
-set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx.cpp
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx.idl.inl
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx_p.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/defines.h
+set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx/bgfx.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/bgfx.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/bgfx.idl.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/bgfx_p.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx/defines.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx/embedded_shader.h
 			 )	 
 
 set(INC_DIR ${CMAKE_ROOT_DIR}/tinyBGFX/include
-			${CMAKE_ROOT_DIR}/tinyBGFX/src/
 			)
 			
 #set(LINK_LIB winmm)
@@ -29,5 +29,5 @@ add_library(${PROJECT_NAME} STATIC ${DIR_SRCS})
 #INSTALL(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_ROOT_DIR}/bin/x64/Debug)
 #INSTALL(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION ${CMAKE_ROOT_DIR}/bin/x64)
 
-set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "libs")
+set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "tinyBGFX")
 

@@ -7,5 +7,30 @@ digraph TTSFML_System {
 	]
 	
 	bgfx -> defines
+	bgfx -> platform
 	
+	bgfx -> embedded_shader
+	
+	embedded_shader -> macros
+	
+	macros -> bx
+	bx -> debug
+	bx -> config
+	debug -> string
+	
+	string -> allocator
+	string -> hash
+	string -> readerwriter
+		
+	readerwriter -> endian
+	readerwriter -> error
+	readerwriter -> filepath
+	readerwriter -> uint32_t
+	readerwriter -> math
+	
+	math -> simd_t
+	simd_t -> simd128_swizzle
+	
+	filepath -> file
+	filepath -> os
 }
