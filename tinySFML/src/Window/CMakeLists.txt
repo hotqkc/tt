@@ -73,15 +73,25 @@ set(DIR_SRCS ${DIR_SRCS} ${PLATFORM_SRC})
 set(INC_DIR ${CMAKE_ROOT_DIR}/tinySFML/include
 			${CMAKE_ROOT_DIR}/tinySFML/src
 			)
+			
+set(LINK_DIR ${CMAKE_ROOT_DIR}/lib/x64/Debug)
+
+set(LINK_LIB tinySFML_System
+			 winmm
+			 gdi32
+			 opengl32)
 
 include_directories(${INC_DIR})
+link_directories(${LINK_DIR})
+link_libraries(${LINK_LIB})
 
-#Add_Definitions(-D_HAS_ITERATOR_DEBUGGING=0)
+#_UNICODE
+Add_Definitions(-DUNICODE -D_UNICODE)
 
 SET(LIBRARY_OUTPUT_PATH ${CMAKE_ROOT_DIR}/lib/x64)
 
-add_library(${PROJECT_NAME} STATIC ${DIR_SRCS})
-#add_library(${PROJECT_NAME} SHARED ${DIR_SRCS})
+#add_library(${PROJECT_NAME} STATIC ${DIR_SRCS})
+add_library(${PROJECT_NAME} SHARED ${DIR_SRCS})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "tinySFML")
 
