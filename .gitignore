@@ -1,0 +1,16 @@
+.DS_Store
+bgfx
+bx
+bimg
+sfml
+build
+bin
+lib
+*.pdb
+*.exp
+*.ilk
+*.vs
+*.vcxproj.filters
+*.vcxproj.user
+
+bin/x64/Debug/Example*
