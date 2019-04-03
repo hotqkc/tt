@@ -74,6 +74,21 @@ set(INLINE_SRC
     )
 source_group("inline" FILES ${INLINE_SRC})
 
+set(TINYSTL_SRC
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/tinystl/allocator.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/tinystl/buffer.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/tinystl/hash.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/tinystl/LICENSE
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/tinystl/new.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/tinystl/stddef.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/tinystl/string.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/tinystl/traits.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/tinystl/unordered_map.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/tinystl/unordered_set.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/tinystl/vector.h
+    )
+source_group("tinystl" FILES ${TINYSTL_SRC})
+
 # add platform specific sources
 if(WIN32)
     set(PLATFORM_SRC
@@ -86,7 +101,7 @@ if(WIN32)
     source_group("msvc" FILES ${PLATFORM_SRC})
 endif()
 
-set(DIR_SRCS ${DIR_SRCS} ${PLATFORM_SRC} ${INLINE_SRC})			 
+set(DIR_SRCS ${DIR_SRCS} ${PLATFORM_SRC} ${INLINE_SRC} ${TINYSTL_SRC})			 
 
 set(INC_DIR ${CMAKE_ROOT_DIR}/tinyBGFX/include
 			${CMAKE_ROOT_DIR}/tinyBGFX/include/bx

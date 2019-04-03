@@ -48,6 +48,30 @@ digraph TTSFML_System {
 	bgfx -> thread
 	bgfx -> timer
 	
+	bgfx -> shader
+	bgfx -> vertexdecl
+	bgfx -> topology
+	bgfx -> vs_fs_bin
+	
+	vs_fs_bin -> vs_debugfont
+	vs_fs_bin -> fs_debugfont
+	vs_fs_bin -> vs_clear
+	vs_fs_bin -> fs_clear0
+	vs_fs_bin -> fs_clear1
+	vs_fs_bin -> fs_clear2
+	vs_fs_bin -> fs_clear3
+	vs_fs_bin -> fs_clear4
+	vs_fs_bin -> fs_clear5
+	vs_fs_bin -> fs_clear6
+	vs_fs_bin -> fs_clear7
+	
+	bgfx -> tinystl
+	bgfx -> charset
+
+	shader -> shader_dxbc
+	shader -> shader_dx9bc
+	shader -> shader_spirv
+	
 	bgfx -> bimg
 	bimg -> image
 	image -> pixelformat

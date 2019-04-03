@@ -9,6 +9,41 @@ set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx/bgfx.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx/embedded_shader.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/config.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx/platform.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/shader.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/shader.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/shader_dxbc.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/shader_dxbc.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/shader_dx9bc.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/shader_dx9bc.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/shader_spirv.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/shader_spirv.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/vertexdecl.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/vertexdecl.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/topology.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/topology.cpp			 
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/vs_debugfont.bin.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/vs_debugfont.sc
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_debugfont.bin.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_debugfont.sc
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/vs_clear.bin.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/vs_clear.sc
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear0.bin.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear0.sc
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear1.bin.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear1.sc
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear2.bin.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear2.sc
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear3.bin.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear3.sc
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear4.bin.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear4.sc
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear5.bin.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear5.sc
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear6.bin.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear6.sc
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear7.bin.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/fs_clear7.sc
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/charset.h
 			 )	
 
 set(C99_SRCS
