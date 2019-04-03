@@ -81,8 +81,6 @@ int main(int argc, char *argv[])
 		 bgfx::frame();
 		 counter++;
 
-
-
      }
 
      return EXIT_SUCCESS;
