@@ -1,0 +1,11 @@
+digraph TTSFML_System {
+
+	rankdir = BT
+
+	node [
+		shape = "record"
+	]
+	
+	bgfx -> defines
+	
+}
