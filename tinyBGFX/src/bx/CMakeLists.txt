@@ -38,6 +38,10 @@ set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/platform.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/math.cpp
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/simd_t.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/simd128_swizzle.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/simd128_sse.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/simd128_ref.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/simd256_ref.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/simd_ni.inl
 			 )	 
 
 set(INC_DIR ${CMAKE_ROOT_DIR}/tinyBGFX/include

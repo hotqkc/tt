@@ -30,6 +30,10 @@ digraph TTSFML_System {
 	
 	math -> simd_t
 	simd_t -> simd128_swizzle
+	simd_t -> simd128_sse
+	simd_t -> simd128_ref
+	simd_t -> simd256_ref
+	simd_t -> simd_ni
 	
 	filepath -> file
 	filepath -> os
