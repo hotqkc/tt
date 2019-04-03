@@ -3,6 +3,7 @@ set(PROJECT_NAME tinyBGFX_bimg)
 
 set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bimg/bimg.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bimg/bimg_p.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bimg/image.cpp
 			 )			 
 
 set(INC_DIR ${CMAKE_ROOT_DIR}/tinyBGFX/include

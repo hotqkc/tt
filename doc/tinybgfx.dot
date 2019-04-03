@@ -49,6 +49,8 @@ digraph TTSFML_System {
 	bgfx -> timer
 	
 	bgfx -> bimg
+	bimg -> image
+	image -> pixelformat
 	
 	thread -> mpscqueue
 	mpscqueue -> spscqueue

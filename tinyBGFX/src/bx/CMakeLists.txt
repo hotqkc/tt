@@ -44,6 +44,7 @@ set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/platform.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/semaphore.cpp
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/timer.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/timer.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/pixelformat.h
 			 )	
 			 
 set(INLINE_SRC
@@ -69,6 +70,7 @@ set(INLINE_SRC
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/sort.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/mpscqueue.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/spscqueue.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/pixelformat.inl
     )
 source_group("inline" FILES ${INLINE_SRC})
 
