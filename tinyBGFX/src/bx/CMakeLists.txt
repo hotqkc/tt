@@ -28,6 +28,22 @@ set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/platform.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/math.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/math.cpp
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/simd_t.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/cpu.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/float4x4_t.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/handlealloc.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/mutex.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/mutex.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/ringbuffer.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/sort.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/sort.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/thread.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/thread.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/mpscqueue.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/spscqueue.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/semaphore.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/semaphore.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/timer.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/timer.cpp
 			 )	
 			 
 set(INLINE_SRC
@@ -45,6 +61,14 @@ set(INLINE_SRC
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/simd128_ref.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/simd256_ref.inl
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/simd_ni.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/cpu.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/float4x4_t.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/handlealloc.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/mutex.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/ringbuffer.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/sort.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/mpscqueue.inl
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/inline/spscqueue.inl
     )
 source_group("inline" FILES ${INLINE_SRC})
 
@@ -82,9 +106,6 @@ include_directories(${INC_DIR})
 Add_Definitions(-D__STDC_LIMIT_MACROS
 				-D__STDC_FORMAT_MACROS
 				-D__STDC_CONSTANT_MACROS
-				-D_DEBUG
-				-DWIN32
-				-D_WIN32
 				-D_HAS_EXCEPTIONS=0
 				-D_HAS_ITERATOR_DEBUGGING=0
 				-D_ITERATOR_DEBUG_LEVEL=0
@@ -93,7 +114,6 @@ Add_Definitions(-D__STDC_LIMIT_MACROS
 				-D_SCL_SECURE_NO_WARNINGS
 				-D_CRT_SECURE_NO_WARNINGS
 				-D_CRT_SECURE_NO_DEPRECATE
-				-D_WIN64
 				-DBX_CONFIG_DEBUG=1
 				)
 

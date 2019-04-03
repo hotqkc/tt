@@ -1,27 +1,14 @@
 
-set(PROJECT_NAME tinyBGFX_bgfx)
+set(PROJECT_NAME tinyBGFX_bimg)
 
-set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx/bgfx.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/bgfx.cpp
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/bgfx.idl.inl
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/bgfx_p.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx/defines.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx/embedded_shader.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/config.h
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx/platform.h
-			 )	
-
-set(C99_SRCS
-		${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx/c99/bgfx.h
-    )
-source_group("c99" FILES ${C99_SRCS})	
-
-set(DIR_SRCS ${DIR_SRCS} ${C99_SRCS})			 
+set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bimg/bimg.h
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bimg/bimg_p.h
+			 )			 
 
 set(INC_DIR ${CMAKE_ROOT_DIR}/tinyBGFX/include
-			${CMAKE_ROOT_DIR}/bgfx/3rdparty
-			${CMAKE_ROOT_DIR}/bgfx/3rdparty/dxsdk/include
-			${CMAKE_ROOT_DIR}/bgfx/3rdparty/khronos
+			${CMAKE_ROOT_DIR}/tinyBGFX/include/bimg
+			${CMAKE_ROOT_DIR}/bimg/3rdparty/astc-codec
+			${CMAKE_ROOT_DIR}/bimg/3rdparty/astc-codec/include
 			)
 
 IF (WIN32)
@@ -45,8 +32,8 @@ Add_Definitions(-D__STDC_LIMIT_MACROS
 				-D_SCL_SECURE_NO_WARNINGS
 				-D_CRT_SECURE_NO_WARNINGS
 				-D_CRT_SECURE_NO_DEPRECATE
-				-DBGFX_CONFIG_DEBUG=1
-			)
+				)
+
 
 SET(LIBRARY_OUTPUT_PATH ${CMAKE_ROOT_DIR}/lib/x64)
 #SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_ROOT_DIR}/bin/x64)

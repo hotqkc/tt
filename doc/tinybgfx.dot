@@ -8,6 +8,7 @@ digraph TTSFML_System {
 	
 	bgfx -> defines
 	bgfx -> platform
+	bgfx -> c99bgfx
 	
 	bgfx -> embedded_shader
 	
@@ -37,4 +38,19 @@ digraph TTSFML_System {
 	
 	filepath -> file
 	filepath -> os
+	
+	bgfx -> cpu
+	bgfx -> float4x4_t
+	bgfx -> handlealloc
+	bgfx -> mutex
+	bgfx -> ringbuffer
+	bgfx -> sort
+	bgfx -> thread
+	bgfx -> timer
+	
+	bgfx -> bimg
+	
+	thread -> mpscqueue
+	mpscqueue -> spscqueue
+	spscqueue -> semaphore
 }
