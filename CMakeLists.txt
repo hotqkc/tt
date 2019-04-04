@@ -14,7 +14,9 @@ set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "CMake")
 
 add_subdirectory("src/Example01-HelloWorld")
 add_subdirectory("src/Example02-HelloBGFX")
+
 add_subdirectory("src/ExampleTest")
+add_subdirectory("src/type_traits_Test")
 
 add_subdirectory("tinySFML/src/System")
 add_subdirectory("tinySFML/src/Window")
