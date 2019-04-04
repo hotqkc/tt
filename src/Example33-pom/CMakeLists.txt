@@ -1,12 +1,13 @@
 
-set(PROJECT_NAME Example01-HelloWorld)
+set(PROJECT_NAME Example33-pom)
 
-aux_source_directory(. DIR_SRCS)
+set(DIR_SRCS ${CMAKE_ROOT_DIR}/src/Example33-pom/main.cpp
+			)
 
 set(INC_DIR ${CMAKE_ROOT_DIR}/tinyBGFX/include 
 			${CMAKE_ROOT_DIR}/tinySFML/include
 			)
-
+		
 IF (WIN32)
 	set(INC_DIR ${INC_DIR} ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/compat/msvc)
 ELSEIF (APPLE)
@@ -33,5 +34,6 @@ SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_ROOT_DIR}/bin/x64)
 
 add_executable(${PROJECT_NAME} ${DIR_SRCS})
 
-set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "SxB")
+
+set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "example")
 

@@ -1,10 +1,10 @@
 
-set(PROJECT_NAME Example02-HelloBGFX)
+set(PROJECT_NAME Example12-lod)
 
-aux_source_directory(. DIR_SRCS)
-
-set(DIR_SRCS ${DIR_SRCS} 
-			 ${CMAKE_CURRENT_LIST_DIR}/cube.h)
+set(DIR_SRCS ${CMAKE_ROOT_DIR}/src/Example12-lod/main.cpp
+			 ${CMAKE_ROOT_DIR}/src/Example12-lod/lod.h
+			 ${CMAKE_ROOT_DIR}/src/Example12-lod/lod.cpp
+			)
 
 set(INC_DIR ${CMAKE_ROOT_DIR}/tinyBGFX/include 
 			${CMAKE_ROOT_DIR}/tinySFML/include
@@ -37,5 +37,5 @@ SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_ROOT_DIR}/bin/x64)
 add_executable(${PROJECT_NAME} ${DIR_SRCS})
 
 
-set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "SxB")
+set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "example")
 

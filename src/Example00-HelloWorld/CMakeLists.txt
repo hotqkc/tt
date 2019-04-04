@@ -1,7 +1,9 @@
 
-set(PROJECT_NAME ExampleTest)
+set(PROJECT_NAME Example00-HelloWorld)
 
-aux_source_directory(. DIR_SRCS)
+set(DIR_SRCS ${CMAKE_ROOT_DIR}/src/Example00-HelloWorld/main.cpp
+			 ${CMAKE_ROOT_DIR}/src/Example00-HelloWorld/logo.h
+			)
 
 set(INC_DIR ${CMAKE_ROOT_DIR}/tinyBGFX/include 
 			${CMAKE_ROOT_DIR}/tinySFML/include
@@ -33,5 +35,5 @@ SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_ROOT_DIR}/bin/x64)
 
 add_executable(${PROJECT_NAME} ${DIR_SRCS})
 
-set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "test")
+set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "example")
 
