@@ -43,14 +43,14 @@ bgfx::ShaderHandle loadShader(const char *FILENAME)
 
 	switch (bgfx::getRendererType()) {
 	case bgfx::RendererType::Noop:
-	case bgfx::RendererType::Direct3D9:  shaderPath = "../../../bgfx/examples/runtime/shaders/dx9/";   break;
+	case bgfx::RendererType::Direct3D9:  shaderPath = "../../../runtime/shaders/dx9/";   break;
 	case bgfx::RendererType::Direct3D11:
-	case bgfx::RendererType::Direct3D12: shaderPath = "../../../bgfx/examples/runtime/shaders/dx11/";  break;
-	case bgfx::RendererType::Gnm:        shaderPath = "../../../bgfx/examples/runtime/shaders/pssl/";  break;
-	case bgfx::RendererType::Metal:      shaderPath = "../../../bgfx/examples/runtime/shaders/metal/"; break;
-	case bgfx::RendererType::OpenGL:     shaderPath = "../../../bgfx/examples/runtime/shaders/glsl/";  break;
-	case bgfx::RendererType::OpenGLES:   shaderPath = "../../../bgfx/examples/runtime/shaders/essl/";  break;
-	case bgfx::RendererType::Vulkan:     shaderPath = "../../../bgfx/examples/runtime/shaders/spirv/"; break;
+	case bgfx::RendererType::Direct3D12: shaderPath = "../../../runtime/shaders/dx11/";  break;
+	case bgfx::RendererType::Gnm:        shaderPath = "../../../runtime/shaders/pssl/";  break;
+	case bgfx::RendererType::Metal:      shaderPath = "../../../runtime/shaders/metal/"; break;
+	case bgfx::RendererType::OpenGL:     shaderPath = "../../../runtime/shaders/glsl/";  break;
+	case bgfx::RendererType::OpenGLES:   shaderPath = "../../../runtime/shaders/essl/";  break;
+	case bgfx::RendererType::Vulkan:     shaderPath = "../../../runtime/shaders/spirv/"; break;
 	}
 
 	//size_t shaderLen = strlen(shaderPath);
