@@ -2,13 +2,14 @@
  * Copyright 2010-2019 Branimir Karadzic. All rights reserved.
  * License: https://github.com/bkaradzic/bx#license-bsd-2-clause
  */
-//#include <type_traits>
 
 #include "bx_p.h"
 #include <bx/cpu.h>
 #include <bx/math.h>
 #include <bx/bxstring.h>
 #include <bx/uint32_t.h>
+
+#include <type_traits>
 
 namespace bx
 {
@@ -469,42 +470,9 @@ namespace bx
 			swap(_dst[ii], _dst[jj]);
 		}
 	}
-	// todo
-	//template<typename Ty>
-	//int32_t toStringSigned(char* _dst, int32_t _max, Ty _value, uint32_t _base, char _separator)
-	//{
-	//	if (_base == 10
-	//		&& _value < 0)
-	//	{
-	//		if (_max < 1)
-	//		{
-	//			return 0;
-	//		}
 
-	//		_max = toString(_dst + 1
-	//			, _max - 1
-	//			, typename std::make_unsigned<Ty>::type(-_value)
-	//			, _base
-	//			, _separator
-	//		);
-	//		if (_max == 0)
-	//		{
-	//			return 0;
-	//		}
-
-	//		*_dst = '-';
-	//		return int32_t(_max + 1);
-	//	}
-
-	//	return toString(_dst
-	//		, _max
-	//		, typename std::make_unsigned<Ty>::type(_value)
-	//		, _base
-	//		, _separator
-	//	);
-	//}
-
-	int32_t toStringSigned(char* _dst, int32_t _max, int32_t _value, uint32_t _base, char _separator)
+	template<typename Ty>
+	int32_t toStringSigned(char* _dst, int32_t _max, Ty _value, uint32_t _base, char _separator)
 	{
 		if (_base == 10
 			&& _value < 0)
@@ -516,7 +484,7 @@ namespace bx
 
 			_max = toString(_dst + 1
 				, _max - 1
-				, -_value
+				, typename std::make_unsigned<Ty>::type(-_value)
 				, _base
 				, _separator
 			);
@@ -531,40 +499,7 @@ namespace bx
 
 		return toString(_dst
 			, _max
-			, _value
-			, _base
-			, _separator
-		);
-	}
-
-	int32_t toStringSigned(char* _dst, int32_t _max, int64_t _value, uint32_t _base, char _separator)
-	{
-		if (_base == 10
-			&& _value < 0)
-		{
-			if (_max < 1)
-			{
-				return 0;
-			}
-
-			_max = toString(_dst + 1
-				, _max - 1
-				, -_value
-				, _base
-				, _separator
-			);
-			if (_max == 0)
-			{
-				return 0;
-			}
-
-			*_dst = '-';
-			return int32_t(_max + 1);
-		}
-
-		return toString(_dst
-			, _max
-			, _value
+			, typename std::make_unsigned<Ty>::type(_value)
 			, _base
 			, _separator
 		);
