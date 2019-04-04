@@ -4,12 +4,17 @@
 
 #include "sxbTop/defines.h"
 
+namespace bgfx
+{
+	class ShaderHandle;
+}
+
 SXB_NAMESPACE_BEGIN
 
 class Utils
 {
 public:
-	bool loadShader();
+	static bool loadShader(const char *FILENAME, bgfx::ShaderHandle & sh_);
 
 private:
 	Utils() {};
