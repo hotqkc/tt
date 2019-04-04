@@ -124,7 +124,7 @@ endif()
 set(DIR_SRCS ${DIR_SRCS} ${PLATFORM_SRC} ${INLINE_SRC} ${TINYSTL_SRC})			 
 
 set(INC_DIR ${CMAKE_ROOT_DIR}/tinyBGFX/include
-			${CMAKE_ROOT_DIR}/bx/3rdparty
+			${CMAKE_ROOT_DIR}/tinyBGFX/3rdparty
 			)
 
 IF (WIN32)

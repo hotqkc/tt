@@ -78,6 +78,9 @@ set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bgfx/bgfx.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/nvapi.cpp
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/dxgi.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/dxgi.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/varying.def.sc
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/amalgamated.cpp
+			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bgfx/amalgamated.mm
 			 )	
 
 set(C99_SRCS
