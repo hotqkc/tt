@@ -91,9 +91,9 @@ source_group("c99" FILES ${C99_SRCS})
 set(DIR_SRCS ${DIR_SRCS} ${C99_SRCS})			 
 
 set(INC_DIR ${CMAKE_ROOT_DIR}/tinyBGFX/include
-			${CMAKE_ROOT_DIR}/bgfx/3rdparty
-			${CMAKE_ROOT_DIR}/bgfx/3rdparty/dxsdk/include
-			${CMAKE_ROOT_DIR}/bgfx/3rdparty/khronos
+			${CMAKE_ROOT_DIR}/tinyBGFX/3rdparty
+			${CMAKE_ROOT_DIR}/tinyBGFX/3rdparty/dxsdk/include
+			${CMAKE_ROOT_DIR}/tinyBGFX/3rdparty/khronos
 			)
 
 IF (WIN32)
