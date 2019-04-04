@@ -8,10 +8,9 @@
 #include <bx/bx.h>
 #include <bx/math.h>
 
-#include "cube.h"
+#include <sxbTop/defines.h>
 
-#define		WNDW_WIDTH		800
-#define		WNDW_HEIGHT		600
+#include "cube.h"
 
 int main(int argc, char *argv[])
  {

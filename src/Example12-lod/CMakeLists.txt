@@ -6,7 +6,8 @@ set(DIR_SRCS ${CMAKE_ROOT_DIR}/src/Example12-lod/main.cpp
 			 ${CMAKE_ROOT_DIR}/src/Example12-lod/lod.cpp
 			)
 
-set(INC_DIR ${CMAKE_ROOT_DIR}/tinyBGFX/include 
+set(INC_DIR ${CMAKE_ROOT_DIR}/include 
+			${CMAKE_ROOT_DIR}/tinyBGFX/include
 			${CMAKE_ROOT_DIR}/tinySFML/include
 			)
 		
@@ -24,6 +25,7 @@ set(LINK_LIB
 		tinyBGFX_bimg
 		tinySFML_System
 		tinySFML_Window
+		sxbCommon
 	)
 
 include_directories(${INC_DIR})

@@ -23,3 +23,5 @@ add_subdirectory("tinySFML/src/Window")
 add_subdirectory("tinyBGFX/src/bgfx")
 add_subdirectory("tinyBGFX/src/bx")
 add_subdirectory("tinyBGFX/src/bimg")
+
+add_subdirectory("src/sxbCommon")

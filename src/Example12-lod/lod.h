@@ -1,5 +1,10 @@
 
+#ifndef LOD_H_DC8C8E2F5FF1CD11F91286184C879E21
+#define LOD_H_DC8C8E2F5FF1CD11F91286184C879E21
+
 #include <stdint.h>  // int32_t
+
+#include <sxbTop/defines.h>
 
 struct KnightPos
 {
@@ -22,6 +27,10 @@ public:
 	~lod() {};
 
 public:
-	void init();
+	void init(void* nwh_);
+
+	void update(const uint64_t & frame_);
 
 };
+
+#endif // LOD_H_DC8C8E2F5FF1CD11F91286184C879E21

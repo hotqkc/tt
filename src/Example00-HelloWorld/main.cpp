@@ -7,10 +7,9 @@
 #include <bgfx/platform.h>
 #include <bx/bx.h>
 
-#include "logo.h"
+#include <sxbTop/defines.h>
 
-#define		WNDW_WIDTH		800
-#define		WNDW_HEIGHT		600
+#include "logo.h"
 
 int main(int argc, char *argv[])
  {
