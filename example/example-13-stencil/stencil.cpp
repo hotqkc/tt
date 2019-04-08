@@ -187,11 +187,11 @@ void stencil::update(const uint64_t & frame_)
 
 		float mtxReflectedBunny[16]; 
 		bx::mtxMul(mtxReflectedBunny, bunnyMtx, reflectMtx);
-		sxb::meshSubmit(m_bunnyMesh, 0, m_program, mtxReflectedBunny, stateDrawscene);
+		//sxb::meshSubmit(m_bunnyMesh, 0, m_program, mtxReflectedBunny, stateDrawscene);
 
 		float mtxShadowedBunny[16];
 		bx::mtxMul(mtxShadowedBunny, bunnyMtx, shadowMtx);
-		sxb::meshSubmit(m_bunnyMesh, 0, m_programShadow, mtxShadowedBunny, stateDrawscene);
+		//sxb::meshSubmit(m_bunnyMesh, 0, m_programShadow, mtxShadowedBunny, stateDrawscene);
 
 		bgfx::frame();
 	}
