@@ -2,7 +2,10 @@
 #ifndef CUBE_H_2AA8FDAF22E7C21931959563A005530C
 #define CUBE_H_2AA8FDAF22E7C21931959563A005530C
 
+#include <bgfx/bgfx.h>
 #include <bx/uint32_t.h>
+
+#include <sxbTop/defines.h>
 
 struct PosColorVertex
 {
@@ -40,42 +43,30 @@ static const uint16_t cubeTriList[] =
 	6, 3, 7,
 };
 
-bgfx::ShaderHandle loadShader(const char *FILENAME)
+class Cube
 {
-	std::string shaderPath = "???";
+public:
+	Cube() : m_ready(false) {};
+	~Cube() 
+	{
+		bgfx::destroy(m_program);
 
-	switch (bgfx::getRendererType()) {
-	case bgfx::RendererType::Noop:
-	case bgfx::RendererType::Direct3D9:  shaderPath = "../../../runtime/shaders/dx9/";   break;
-	case bgfx::RendererType::Direct3D11:
-	case bgfx::RendererType::Direct3D12: shaderPath = "../../../runtime/shaders/dx11/";  break;
-	case bgfx::RendererType::Gnm:        shaderPath = "../../../runtime/shaders/pssl/";  break;
-	case bgfx::RendererType::Metal:      shaderPath = "../../../runtime/shaders/metal/"; break;
-	case bgfx::RendererType::OpenGL:     shaderPath = "../../../runtime/shaders/glsl/";  break;
-	case bgfx::RendererType::OpenGLES:   shaderPath = "../../../runtime/shaders/essl/";  break;
-	case bgfx::RendererType::Vulkan:     shaderPath = "../../../runtime/shaders/spirv/"; break;
-	}
+		bgfx::destroy(m_vbh);
+		bgfx::destroy(m_ibh);
 
-	//size_t shaderLen = strlen(shaderPath);
-	//size_t fileLen = strlen(FILENAME);
-	//char *filePath = (char *)malloc(shaderLen + fileLen);
-	//memcpy(filePath, shaderPath, shaderLen);
-	//memcpy(&filePath[shaderLen], FILENAME, fileLen);
+		bgfx::shutdown();
+	};
 
-	shaderPath += FILENAME;
+public:
+	bool init(void* nwh_);
 
-	FILE *file = fopen(shaderPath.c_str(), "rb");
-	char * mesg = strerror(errno);
-	fseek(file, 0, SEEK_END);
-	long fileSize = ftell(file);
-	fseek(file, 0, SEEK_SET);
+	void update(const uint64_t & frame_ = 0);
 
-	const bgfx::Memory *mem = bgfx::alloc(fileSize + 1);
-	fread(mem->data, 1, fileSize, file);
-	mem->data[mem->size - 1] = '\0';
-	fclose(file);
-
-	return bgfx::createShader(mem);
-}
+private:
+	bool m_ready;
+	bgfx::ProgramHandle m_program;
+	bgfx::VertexBufferHandle m_vbh;
+	bgfx::IndexBufferHandle m_ibh;
+};
 
 #endif // CUBE_H_2AA8FDAF22E7C21931959563A005530C

@@ -58,7 +58,6 @@ set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/platform.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/url.h
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/url.cpp
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/crtnone.cpp
-			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/amalgamated.cpp
 			 ${CMAKE_ROOT_DIR}/tinyBGFX/src/bx/dtoa.cpp
 			 )	
 			 
@@ -124,7 +123,7 @@ endif()
 set(DIR_SRCS ${DIR_SRCS} ${PLATFORM_SRC} ${INLINE_SRC} ${TINYSTL_SRC})			 
 
 set(INC_DIR ${CMAKE_ROOT_DIR}/tinyBGFX/include
-			${CMAKE_ROOT_DIR}/tinyBGFX/3rdparty
+			${CMAKE_ROOT_DIR}/3rdparty
 			)
 
 IF (WIN32)
@@ -132,12 +131,8 @@ IF (WIN32)
 ELSEIF (APPLE)
 	set(INC_DIR ${INC_DIR} ${CMAKE_ROOT_DIR}/tinyBGFX/include/bx/compat/osx)
 ENDIF()
-			
-#set(LINK_LIB winmm)
-
+		
 include_directories(${INC_DIR})
-#link_directories(${LINK_DIR})
-#link_libraries(${LINK_LIB})
 
 Add_Definitions(-D__STDC_LIMIT_MACROS
 				-D__STDC_FORMAT_MACROS
@@ -153,15 +148,8 @@ Add_Definitions(-D__STDC_LIMIT_MACROS
 				-DBX_CONFIG_DEBUG=1
 				)
 
-
-SET(LIBRARY_OUTPUT_PATH ${CMAKE_ROOT_DIR}/lib/x64)
-#SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_ROOT_DIR}/bin/x64)
-
-add_library(${PROJECT_NAME} STATIC ${DIR_SRCS})
-#add_library(${PROJECT_NAME} SHARED ${DIR_SRCS})
-
-#INSTALL(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_ROOT_DIR}/bin/x64/Debug)
-#INSTALL(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION ${CMAKE_ROOT_DIR}/bin/x64)
-
-set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "libs")
-
+sxb_add_library(
+				${PROJECT_NAME} 
+				FOLDER "libs" 
+				SOURCES ${DIR_SRCS}
+)

@@ -28,11 +28,11 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/System/NonCopyable.hpp>
+#include <System/NonCopyable.hpp>
 #include <pthread.h>
 
 
-namespace sf
+namespace tinySFML
 {
 namespace priv
 {

@@ -1,100 +1,169 @@
 
 set(PROJECT_NAME tinySFML_Window)
 
-set(DIR_SRCS ${CMAKE_ROOT_DIR}/tinySFML/include/Config.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/include/Window/Export.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/include/Window/WindowBase.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/WindowBase.cpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/include/Window/Cursor.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Cursor.cpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/CursorImpl.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/include/Window/VideoMode.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/VideoMode.cpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/VideoModeImpl.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/include/Window/WindowHandle.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/include/Window/WindowStyle.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/WindowImpl.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/WindowImpl.cpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/include/Window/ContextSettings.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/include/Window/Event.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/include/Window/Joystick.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Joystick.cpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/JoystickImpl.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/JoystickManager.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/JoystickManager.cpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/include/Window/Keyboard.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Keyboard.cpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/InputImpl.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/include/Window/Mouse.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Mouse.cpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/include/Window/Sensor.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Sensor.cpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/SensorImpl.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/SensorManager.hpp
-			 ${CMAKE_ROOT_DIR}/tinySFML/src/Window/SensorManager.cpp
-			 )
+set(INCROOT ${CMAKE_ROOT_DIR}/tinySFML/include/Window)
+set(SRCROOT ${CMAKE_ROOT_DIR}/tinySFML/src/Window)
+
+set(DIR_SRCS 
+	${CMAKE_ROOT_DIR}/tinySFML/include/Config.hpp
+	${INCROOT}/Export.hpp
+	${INCROOT}/WindowBase.hpp
+	${SRCROOT}/WindowBase.cpp
+	${INCROOT}/Cursor.hpp
+	${SRCROOT}/Cursor.cpp
+	${SRCROOT}/CursorImpl.hpp
+	${INCROOT}/VideoMode.hpp
+	${SRCROOT}/VideoMode.cpp
+	${SRCROOT}/VideoModeImpl.hpp
+	${INCROOT}/WindowHandle.hpp
+	${INCROOT}/WindowStyle.hpp
+	${SRCROOT}/WindowImpl.hpp
+	${SRCROOT}/WindowImpl.cpp
+	${INCROOT}/ContextSettings.hpp
+	${INCROOT}/Event.hpp
+	${INCROOT}/Joystick.hpp
+	${SRCROOT}/Joystick.cpp
+	${SRCROOT}/JoystickImpl.hpp
+	${SRCROOT}/JoystickManager.hpp
+	${SRCROOT}/JoystickManager.cpp
+	${INCROOT}/Keyboard.hpp
+	${SRCROOT}/Keyboard.cpp
+	${SRCROOT}/InputImpl.hpp
+	${INCROOT}/Mouse.hpp
+	${SRCROOT}/Mouse.cpp
+	${INCROOT}/Sensor.hpp
+	${SRCROOT}/Sensor.cpp
+	${SRCROOT}/SensorImpl.hpp
+	${SRCROOT}/SensorManager.hpp
+	${SRCROOT}/SensorManager.cpp
+)
 			 
 # add platform specific sources
-if(WIN32)
+if(SXB_OS_WINDOWS)
     set(PLATFORM_SRC
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Win32/CursorImpl.hpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Win32/CursorImpl.cpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Win32/VideoModeImpl.cpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Win32/JoystickImpl.hpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Win32/JoystickImpl.cpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Win32/InputImpl.hpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Win32/InputImpl.cpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Win32/SensorImpl.hpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Win32/SensorImpl.cpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Win32/WindowImplWin32.hpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Win32/WindowImplWin32.cpp
-    )
+        ${SRCROOT}/Win32/CursorImpl.hpp
+        ${SRCROOT}/Win32/CursorImpl.cpp
+        ${SRCROOT}/Win32/VideoModeImpl.cpp
+        ${SRCROOT}/Win32/JoystickImpl.hpp
+        ${SRCROOT}/Win32/JoystickImpl.cpp
+        ${SRCROOT}/Win32/InputImpl.hpp
+        ${SRCROOT}/Win32/InputImpl.cpp
+        ${SRCROOT}/Win32/SensorImpl.hpp
+        ${SRCROOT}/Win32/SensorImpl.cpp
+        ${SRCROOT}/Win32/WindowImplWin32.hpp
+        ${SRCROOT}/Win32/WindowImplWin32.cpp
+	)
     source_group("windows" FILES ${PLATFORM_SRC})
-else()
+	Add_Definitions(-DUNICODE -D_UNICODE)
+elseif(SXB_OS_LINUX)
     set(PLATFORM_SRC
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Unix/CursorImpl.hpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Unix/CursorImpl.cpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Unix/VideoModeImpl.cpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Unix/JoystickImpl.hpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Unix/JoystickImpl.cpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Unix/InputImpl.hpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Unix/InputImpl.cpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Unix/SensorImpl.hpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Unix/SensorImpl.cpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Unix/WindowImplX11.hpp
-        ${CMAKE_ROOT_DIR}/tinySFML/src/Window/Unix/WindowImplX11.cpp
-    )
-
+        ${SRCROOT}/Unix/CursorImpl.hpp
+        ${SRCROOT}/Unix/CursorImpl.cpp
+        ${SRCROOT}/Unix/VideoModeImpl.cpp
+        ${SRCROOT}/Unix/JoystickImpl.hpp
+        ${SRCROOT}/Unix/JoystickImpl.cpp
+        ${SRCROOT}/Unix/InputImpl.hpp
+        ${SRCROOT}/Unix/InputImpl.cpp
+        ${SRCROOT}/Unix/SensorImpl.hpp
+        ${SRCROOT}/Unix/SensorImpl.cpp
+        ${SRCROOT}/Unix/WindowImplX11.hpp
+        ${SRCROOT}/Unix/WindowImplX11.cpp
+	)
     source_group("unix" FILES ${PLATFORM_SRC})
+elseif(SXB_OS_MACOS)
+	set(PLATFORM_SRC
+		${SRCROOT}/OSX/AutoreleasePoolWrapper.h
+		${SRCROOT}/OSX/AutoreleasePoolWrapper.mm
+		${SRCROOT}/OSX/cpp_objc_conversion.h
+		${SRCROOT}/OSX/cpp_objc_conversion.mm
+		${SRCROOT}/OSX/cg_sf_conversion.hpp
+		${SRCROOT}/OSX/cg_sf_conversion.mm
+		${SRCROOT}/OSX/CursorImpl.hpp
+		${SRCROOT}/OSX/CursorImpl.mm
+		${SRCROOT}/OSX/VideoModeImpl.cpp
+		${SRCROOT}/OSX/JoystickImpl.hpp
+		${SRCROOT}/OSX/JoystickImpl.cpp
+		${SRCROOT}/OSX/InputImpl.hpp
+		${SRCROOT}/OSX/InputImpl.mm
+		${SRCROOT}/OSX/HIDInputManager.hpp
+		${SRCROOT}/OSX/HIDInputManager.mm
+		${SRCROOT}/OSX/HIDJoystickManager.hpp
+		${SRCROOT}/OSX/HIDJoystickManager.cpp
+		${SRCROOT}/OSX/NSImage+raw.h
+		${SRCROOT}/OSX/NSImage+raw.mm
+		${SRCROOT}/OSX/Scaling.h
+		${SRCROOT}/OSX/SensorImpl.hpp
+		${SRCROOT}/OSX/SensorImpl.cpp
+		${SRCROOT}/OSX/SFApplication.h
+        ${SRCROOT}/OSX/SFApplication.m
+		${SRCROOT}/OSX/SFApplicationDelegate.h
+		${SRCROOT}/OSX/SFApplicationDelegate.m
+		${SRCROOT}/OSX/SFKeyboardModifiersHelper.h
+		${SRCROOT}/OSX/SFKeyboardModifiersHelper.mm
+		${SRCROOT}/OSX/SFOpenGLView.h
+        ${SRCROOT}/OSX/SFOpenGLView.mm
+		${SRCROOT}/OSX/SFOpenGLView+mouse.mm
+        ${SRCROOT}/OSX/SFOpenGLView+mouse_priv.h
+        ${SRCROOT}/OSX/SFSilentResponder.h
+        ${SRCROOT}/OSX/SFSilentResponder.m
+		${SRCROOT}/OSX/SFWindowController.h
+		${SRCROOT}/OSX/SFWindowController.mm
+		${SRCROOT}/OSX/SFViewController.h
+		${SRCROOT}/OSX/SFViewController.mm
+		${SRCROOT}/OSX/SFWindow.h
+		${SRCROOT}/OSX/SFWindow.m
+		${SRCROOT}/OSX/WindowImplCocoa.hpp
+		${SRCROOT}/OSX/WindowImplCocoa.mm
+		${SRCROOT}/OSX/WindowImplDelegateProtocol.h
+	)
+	source_group("mac" FILES ${PLATFORM_SRC})
+elseif(SXB_OS_IOS)
+	set(PLATFORM_SRC
+        ${SRCROOT}/iOS/CursorImpl.hpp
+        ${SRCROOT}/iOS/CursorImpl.cpp
+        ${SRCROOT}/iOS/VideoModeImpl.mm
+        ${SRCROOT}/iOS/JoystickImpl.hpp
+        ${SRCROOT}/iOS/JoystickImpl.mm
+        ${SRCROOT}/iOS/SensorImpl.hpp
+        ${SRCROOT}/iOS/SensorImpl.mm
+        ${SRCROOT}/iOS/WindowImplUIKit.hpp
+        ${SRCROOT}/iOS/WindowImplUIKit.mm
+    )
+    source_group("ios" FILES ${PLATFORM_SRC})
+elseif(SXB_OS_ANDROID)
+	set(PLATFORM_SRC
+        ${SRCROOT}/Android/CursorImpl.hpp
+        ${SRCROOT}/Android/CursorImpl.cpp
+        ${SRCROOT}/Android/VideoModeImpl.cpp
+        ${SRCROOT}/Android/JoystickImpl.hpp
+        ${SRCROOT}/Android/JoystickImpl.cpp
+        ${SRCROOT}/Android/InputImpl.hpp
+        ${SRCROOT}/Android/InputImpl.cpp
+        ${SRCROOT}/Android/SensorImpl.hpp
+        ${SRCROOT}/Android/SensorImpl.cpp
+        ${SRCROOT}/Android/WindowImplAndroid.hpp
+        ${SRCROOT}/Android/WindowImplAndroid.cpp
+    )
+    source_group("android" FILES ${PLATFORM_SRC})
 endif()
 
-set(DIR_SRCS ${DIR_SRCS} ${PLATFORM_SRC})
-
-set(INC_DIR ${CMAKE_ROOT_DIR}/tinySFML/include
-			${CMAKE_ROOT_DIR}/tinySFML/src
-			)
-			
-set(LINK_DIR ${CMAKE_ROOT_DIR}/lib/x64/Debug)
-
-set(LINK_LIB tinySFML_System
-			 winmm
-			 gdi32
-			 opengl32)
-
+set(INC_DIR 
+	${CMAKE_ROOT_DIR}/tinySFML/include
+	${CMAKE_ROOT_DIR}/tinySFML/src
+)
 include_directories(${INC_DIR})
-link_directories(${LINK_DIR})
-link_libraries(${LINK_LIB})
 
-#_UNICODE
-Add_Definitions(-DUNICODE -D_UNICODE)
+sxb_add_library(
+				${PROJECT_NAME} 
+				SHARED INSTALL 
+				FOLDER "libs" 
+				SOURCES ${DIR_SRCS} ${PLATFORM_SRC}
+)
 
-SET(LIBRARY_OUTPUT_PATH ${CMAKE_ROOT_DIR}/lib/x64)
-
-#add_library(${PROJECT_NAME} STATIC ${DIR_SRCS})
-add_library(${PROJECT_NAME} SHARED ${DIR_SRCS})
-
-INSTALL(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_ROOT_DIR}/bin/x64/Debug)
-#INSTALL(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION ${CMAKE_ROOT_DIR}/bin/x64)
-
-set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "libs")
+target_link_libraries(${PROJECT_NAME} PUBLIC tinySFML_System)
+if(SXB_OS_WINDOWS)
+	target_link_libraries(${PROJECT_NAME} PRIVATE winmm gdi32)
+elseif(SXB_OS_MACOS)
+	target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework AppKit" "-framework IOKit" "-framework Carbon")
+endif()
 
