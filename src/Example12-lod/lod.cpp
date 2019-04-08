@@ -24,16 +24,16 @@ bool lod::init(void* nwh_)
 	bgfxInit.resolution.reset = m_reset;
 	bgfx::init(bgfxInit);
 
-	// Enable debug text.
 	bgfx::setDebug(m_debug);
 
-	// Set view 0 clear state.
 	bgfx::setViewClear(0
 		, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH
 		, 0x303030ff
 		, 1.0f
 		, 0
 	);
+
+	bgfx::setViewRect(0, 0, 0, uint16_t(m_width), uint16_t(m_height));
 
 	s_texColor = bgfx::createUniform("s_texColor", bgfx::UniformType::Sampler);
 	s_texStipple = bgfx::createUniform("s_texStipple", bgfx::UniformType::Sampler);
@@ -82,17 +82,11 @@ void lod::update(const uint64_t & frame_)
 {
 	if (m_ready)
 	{
-		// Set view 0 default viewport.
-		bgfx::setViewRect(0, 0, 0, uint16_t(m_width), uint16_t(m_height));
-
-		// This dummy draw call is here to make sure that view 0 is cleared
-		// if no other draw calls are submitted to view 0.
 		bgfx::touch(0);
 
 		const bx::Vec3 at = { 0.0f, 1.0f,      0.0f };
 		const bx::Vec3 eye = { 0.0f, 2.0f, -m_distance };
 
-		// Set view and projection matrix for view 0.
 		{
 			float view[16];
 			bx::mtxLookAt(view, eye, at);
@@ -100,9 +94,6 @@ void lod::update(const uint64_t & frame_)
 			float proj[16];
 			bx::mtxProj(proj, 60.0f, float(m_width) / float(m_height), 0.1f, 100.0f, bgfx::getCaps()->homogeneousDepth);
 			bgfx::setViewTransform(0, view, proj);
-
-			// Set view 0 default viewport.
-			bgfx::setViewRect(0, 0, 0, uint16_t(m_width), uint16_t(m_height));
 		}
 
 		float mtx[16];
