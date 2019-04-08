@@ -7,3 +7,4 @@ include_directories(${TEST_INC_DIR})
 
 add_subdirectory("test_platform")
 add_subdirectory("test_sfml")
+add_subdirectory("test_3d")
