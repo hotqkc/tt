@@ -28,17 +28,17 @@ bool Mesh::load(const char* _filePath)
 }
 
 bool Mesh::load(
-	const void* _VertexBufferData,
-	uint32_t _VertexBufferSize,
+	const void* _vertices,
+	uint32_t _numVertices,
 	const ::bgfx::VertexDecl& _decl,
-	const void* _IndexBufferData,
-	uint32_t _IndexBufferSize
+	const void* _indices,
+	uint32_t _numIndices
 )
 {
 	bool Result = true;
 	Group group;
-	group.m_vbh = bgfx::createVertexBuffer(bgfx::makeRef(_VertexBufferData, _VertexBufferSize), _decl);
-	group.m_ibh = bgfx::createIndexBuffer(bgfx::makeRef(_IndexBufferData, _IndexBufferSize));
+	group.m_vbh = bgfx::createVertexBuffer(bgfx::makeRef(_vertices, _numVertices), _decl);
+	group.m_ibh = bgfx::createIndexBuffer(bgfx::makeRef(_indices, _numIndices));
 
 	m_groups.push_back(group);
 	group.reset();

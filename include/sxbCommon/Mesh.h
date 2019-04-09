@@ -94,11 +94,11 @@ public:
 	bool load(const char* _filePath);
 
 	bool load(
-		const void* _VertexBufferData,
-		uint32_t _VertexBufferSize,
+		const void* _vertices,
+		uint32_t _numVertices,
 		const ::bgfx::VertexDecl& _decl,
-		const void* _IndexBufferData,
-		uint32_t _IndexBufferSize
+		const void* _indices,
+		uint32_t _numIndices
 	);
 
 	void unload();
