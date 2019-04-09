@@ -1,10 +1,6 @@
 
- - VertexBufferHandle
- - IndexBufferHandle
+ - BGFX_CHECK_API_THREAD()
  
  
  
- 
- 
- - ShaderHandle
- - ProgramHandle
+ - s_ctx

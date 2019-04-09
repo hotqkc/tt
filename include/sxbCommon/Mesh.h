@@ -44,6 +44,21 @@ void meshSubmit(const Mesh* _mesh, ::bgfx::ViewId _id, ::bgfx::ProgramHandle _pr
 ///
 void meshSubmit(const Mesh* _mesh, const MeshState*const* _state, uint8_t _numPasses, const float* _mtx, uint16_t _numMatrices = 1);
 
+void Submit(
+	::bgfx::ViewId _id, 
+	::bgfx::ProgramHandle _program, 
+	::bgfx::VertexBufferHandle _vbh, 
+	::bgfx::IndexBufferHandle _ibh,
+	const float* _mtx, 
+	uint64_t _state);
+
+void Submit(
+	::bgfx::ViewId _id,
+	::bgfx::ProgramHandle _program,
+	::bgfx::VertexBufferHandle _vbh,
+	::bgfx::IndexBufferHandle _ibh,
+	uint64_t _state);
+
 
 SXB_NAMESPACE_END
 

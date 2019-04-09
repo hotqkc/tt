@@ -318,6 +318,32 @@ void meshSubmit(const Mesh* _mesh, const MeshState*const* _state, uint8_t _numPa
 	_mesh->submit(_state, _numPasses, _mtx, _numMatrices);
 }
 
+void Submit(
+	::bgfx::ViewId _id,
+	::bgfx::ProgramHandle _program,
+	::bgfx::VertexBufferHandle _vbh,
+	::bgfx::IndexBufferHandle _ibh,
+	const float* _mtx,
+	uint64_t _state)
+{
+	bgfx::setTransform(_mtx);
+	bgfx::setVertexBuffer(0, _vbh);
+	bgfx::setIndexBuffer(_ibh);
+	bgfx::setState(_state);
+	bgfx::submit(0, _program);
+}
 
+void Submit(
+	::bgfx::ViewId _id,
+	::bgfx::ProgramHandle _program,
+	::bgfx::VertexBufferHandle _vbh,
+	::bgfx::IndexBufferHandle _ibh,
+	uint64_t _state)
+{
+	bgfx::setVertexBuffer(0, _vbh);
+	bgfx::setIndexBuffer(_ibh);
+	bgfx::setState(_state);
+	bgfx::submit(0, _program);
+}
 
 SXB_NAMESPACE_END
