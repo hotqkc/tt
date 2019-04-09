@@ -94,7 +94,8 @@ private:
 	uint32_t m_debug;
 	uint32_t m_reset;
 
-	sxb::Mesh* m_bunnyMesh;
+	sxb::Mesh m_bunnyMesh;
+	sxb::Mesh m_coordMesh;
 
 	bgfx::VertexBufferHandle m_vbh[MAX_VBH];
 	bgfx::IndexBufferHandle m_ibh[MAX_IBH];

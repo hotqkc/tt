@@ -51,7 +51,7 @@ static PosColorVertex s_cubeVertices[] =
 static PosColorVertex s_coorVertices[] =
 {
 	{1000.0f,  0.0f,  0.0f, 0xff0000ff },
-	{-1000.0f,  0.0f,  0.0f, 0xff0000ff },
+	{-1000.0f,  0.0f,  0.0f, 0xff00ff00 },
 	 {0.0f,  1000.0f,  0.0f, 0xff0000ff },
 	 {0.0f,  -1000.0f,  0.0f, 0xff0000ff },
 	 {0.0f,  0.0f,  1000.0f, 0xff0000ff },
@@ -134,7 +134,7 @@ bool Cube::init(void* nwh_)
 	m_ready = sxb::Utils::loadProgram("vs_stencil_color_lighting.bin", "fs_stencil_color_lighting.bin", m_program);
 	m_ready &= sxb::Utils::loadProgram("vs_cubes.bin", "fs_cubes.bin", m_program_cube);
 
-	m_bunnyMesh = sxb::meshLoad("meshes/bunny.bin");
+	m_bunnyMesh.load("meshes/bunny.bin");
 
 	bgfx::VertexDecl pcvDecl;
 	pcvDecl.begin()
@@ -159,6 +159,8 @@ bool Cube::init(void* nwh_)
 	m_ibh[3] = bgfx::createIndexBuffer(
 		bgfx::makeRef(s_coorList, sizeof(s_coorList))
 	);
+
+	m_coordMesh.load(s_coorVertices, sizeof(s_coorVertices), pcvDecl, s_coorList, sizeof(s_coorList));
 
 	return m_ready;
 }
@@ -208,11 +210,12 @@ void Cube::update(const uint64_t & frame_)
 			bgfx::setViewTransform(0, view, proj);
 		}
 
-		sxb::meshSubmit(m_bunnyMesh, 0, m_program, bunnyMtx, BGFX_STATE_DEFAULT);
-		 
+		m_bunnyMesh.submit(0, m_program, bunnyMtx, BGFX_STATE_DEFAULT);
+
 		float mtx[16];
 		bx::mtxRotateXY(mtx, 0.0f, 0.0f);
-		sxb::Submit(0, m_program_cube, m_vbh[1], m_ibh[3], BGFX_STATE_DEFAULT | BGFX_STATE_PT_LINES);
+		m_coordMesh.submit(0, m_program_cube, NULL, BGFX_STATE_DEFAULT | BGFX_STATE_PT_LINES);
+		//sxb::Submit(0, m_program_cube, m_vbh[1], m_ibh[3], BGFX_STATE_DEFAULT | BGFX_STATE_PT_LINES);
 
 		bgfx::frame();
 	}
