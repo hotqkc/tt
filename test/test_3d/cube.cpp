@@ -102,6 +102,45 @@ static const uint16_t s_cubePoints[] =
 	0, 1, 2, 3, 4, 5, 6, 7
 };
 
+struct PosNormalTexcoordVertex
+{
+	float    m_x;
+	float    m_y;
+	float    m_z;
+	uint32_t m_normal;
+	float    m_u;
+	float    m_v;
+
+	static void init()
+	{
+		ms_decl
+			.begin()
+			.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+			.add(bgfx::Attrib::Normal, 4, bgfx::AttribType::Uint8, true, true)
+			.add(bgfx::Attrib::TexCoord0, 2, bgfx::AttribType::Float)
+			.end();
+	}
+
+	static bgfx::VertexDecl ms_decl;
+};
+
+bgfx::VertexDecl PosNormalTexcoordVertex::ms_decl;
+
+static const float s_texcoord = 5.0f;
+static PosNormalTexcoordVertex s_hplaneVertices[] =
+{
+	{ -1.0f, 0.0f,  1.0f, encodeNormalRgba8(0.0f, 1.0f, 0.0f), s_texcoord, s_texcoord },
+	{  1.0f, 0.0f,  1.0f, encodeNormalRgba8(0.0f, 1.0f, 0.0f), s_texcoord, 0.0f       },
+	{ -1.0f, 0.0f, -1.0f, encodeNormalRgba8(0.0f, 1.0f, 0.0f), 0.0f,       s_texcoord },
+	{  1.0f, 0.0f, -1.0f, encodeNormalRgba8(0.0f, 1.0f, 0.0f), 0.0f,       0.0f       },
+};
+
+static const uint16_t s_planeIndices[] =
+{
+	0, 1, 2,
+	1, 3, 2,
+};
+
 bool Cube::init(void* nwh_)
 {
 	m_width = WNDW_WIDTH;
@@ -133,35 +172,42 @@ bool Cube::init(void* nwh_)
 
 	m_ready = sxb::Utils::loadProgram("vs_stencil_color_lighting.bin", "fs_stencil_color_lighting.bin", m_program);
 	m_ready &= sxb::Utils::loadProgram("vs_cubes.bin", "fs_cubes.bin", m_program_cube);
+	m_ready &= sxb::Utils::loadProgram("vs_stencil_texture_lighting.bin", "fs_stencil_texture_lighting.bin", m_program_TextureLighting);
 
-	m_bunnyMesh.load("meshes/bunny.bin");
-
-	bgfx::VertexDecl pcvDecl;
+	bgfx::VertexDecl pcvDecl, flDecl;
 	pcvDecl.begin()
 		.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
 		.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
 		.end();
-	m_vbh[0] = bgfx::createVertexBuffer(bgfx::makeRef(s_cubeVertices, sizeof(s_cubeVertices)), pcvDecl);
-	m_vbh[1] = bgfx::createVertexBuffer(bgfx::makeRef(s_coorVertices, sizeof(s_coorVertices)), pcvDecl);
-
-	m_ibh[0] = bgfx::createIndexBuffer(
-		bgfx::makeRef(s_cubeTriList, sizeof(s_cubeTriList))
-	);
-
-	m_ibh[1] = bgfx::createIndexBuffer(
-		bgfx::makeRef(s_cubeLineList, sizeof(s_cubeLineList))
-	);
-
-	m_ibh[2] = bgfx::createIndexBuffer(
-		bgfx::makeRef(s_cubePoints, sizeof(s_cubePoints))
-	);
-
-	m_ibh[3] = bgfx::createIndexBuffer(
-		bgfx::makeRef(s_coorList, sizeof(s_coorList))
-	);
+	flDecl.begin()
+		.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+		.add(bgfx::Attrib::Normal, 4, bgfx::AttribType::Uint8, true, true)
+		.add(bgfx::Attrib::TexCoord0, 2, bgfx::AttribType::Float)
+		.end();
 
 	m_coordMesh.load(s_coorVertices, sizeof(s_coorVertices), pcvDecl, s_coorList, sizeof(s_coorList));
+	m_floorMesh.load(s_hplaneVertices, sizeof(s_hplaneVertices), flDecl, s_planeIndices, sizeof(s_planeIndices));
 
+	m_bunnyMesh.load("meshes/bunny.bin");
+	m_columnMesh.load("meshes/column.bin");
+
+	sxb::Utils::loadTexture("textures/fieldstone-rgba.dds", m_fieldstoneTex);
+
+	m_texColor = bgfx::createUniform("m_texColor", bgfx::UniformType::Sampler);
+
+	floorState.m_program = m_program_TextureLighting;
+	floorState.m_state = BGFX_STATE_WRITE_RGB
+		| BGFX_STATE_WRITE_Z
+		| BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_ONE, BGFX_STATE_BLEND_SRC_COLOR)
+		| BGFX_STATE_DEPTH_TEST_LESS
+		| BGFX_STATE_CULL_CCW
+		| BGFX_STATE_MSAA;
+	floorState.m_viewId = 0;
+	floorState.m_numTextures = 1;
+	floorState.m_textures[0].m_texture = m_fieldstoneTex;
+	floorState.m_textures[0].m_sampler = m_texColor;
+	floorState.m_textures[0].m_stage = 0;
+	floorState.m_textures[0].m_flags = UINT32_MAX;
 	return m_ready;
 }
 
@@ -181,6 +227,42 @@ void Cube::update(const uint64_t & frame_)
 			, 2.0f
 			, 0.0f
 		);
+		const float dist = 14.0f;
+		const float columnPositions[4][3] =
+		{
+			{  dist, 0.0f,  dist },
+			{ -dist, 0.0f,  dist },
+			{  dist, 0.0f, -dist },
+			{ -dist, 0.0f, -dist },
+		};
+		float columnMtx[4][16];
+		for (uint8_t ii = 0; ii < 4; ++ii)
+		{
+			bx::mtxSRT(columnMtx[ii]
+				, 1.0f
+				, 1.0f
+				, 1.0f
+				, 0.0f
+				, 0.0f
+				, 0.0f
+				, columnPositions[ii][0]
+				, columnPositions[ii][1]
+				, columnPositions[ii][2]
+			);
+		}
+		float floorMtx[16];
+		bx::mtxSRT(floorMtx
+			, 20.0f  //scaleX
+			, 20.0f  //scaleY
+			, 20.0f  //scaleZ
+			, 0.0f   //rotX
+			, 0.0f   //rotY
+			, 0.0f   //rotZ
+			, 0.0f   //translateX
+			, 0.0f   //translateY
+			, 0.0f   //translateZ
+		);
+
 
 		bgfx::touch(0);
 
@@ -212,8 +294,16 @@ void Cube::update(const uint64_t & frame_)
 
 		m_bunnyMesh.submit(0, m_program, bunnyMtx, BGFX_STATE_DEFAULT);
 
-		float mtx[16];
-		bx::mtxRotateXY(mtx, 0.0f, 0.0f);
+		for (uint8_t ii = 0; ii < 4; ++ii)
+		{
+
+			m_columnMesh.submit(0, m_program, columnMtx[ii], BGFX_STATE_DEFAULT);
+		}
+		//m_floorMesh.submit(0, m_program_TextureLighting, floorMtx, BGFX_STATE_DEFAULT);
+		sxb::MeshState ss[1];
+		ss[0] = floorState;
+		m_floorMesh.submit(ss, (uint8_t)1, floorMtx, 1);
+		
 		m_coordMesh.submit(0, m_program_cube, NULL, BGFX_STATE_DEFAULT | BGFX_STATE_PT_LINES);
 		//sxb::Submit(0, m_program_cube, m_vbh[1], m_ibh[3], BGFX_STATE_DEFAULT | BGFX_STATE_PT_LINES);
 

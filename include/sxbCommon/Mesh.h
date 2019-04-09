@@ -105,7 +105,7 @@ public:
 
 	void submit(::bgfx::ViewId _id, ::bgfx::ProgramHandle _program, const float* _mtx, uint64_t _state) const;
 
-	void submit(const MeshState*const* _state, uint8_t _numPasses, const float* _mtx, uint16_t _numMatrices) const;
+	void submit(MeshState _state[], uint8_t _numPasses, const float* _mtx, uint16_t _numMatrices) const;
 
 private:
 	bool loadImpl(bx::ReaderSeekerI* _reader);

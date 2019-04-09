@@ -95,6 +95,8 @@ private:
 	uint32_t m_reset;
 
 	sxb::Mesh m_bunnyMesh;
+	sxb::Mesh m_columnMesh;
+	sxb::Mesh m_floorMesh;
 	sxb::Mesh m_coordMesh;
 
 	bgfx::VertexBufferHandle m_vbh[MAX_VBH];
@@ -102,6 +104,12 @@ private:
 
 	bgfx::ProgramHandle m_program;
 	bgfx::ProgramHandle m_program_cube;
+	bgfx::ProgramHandle m_program_TextureLighting;
+
+	bgfx::UniformHandle m_texColor;
+	bgfx::TextureHandle m_fieldstoneTex;
+
+	sxb::MeshState floorState;
 
 	std::string m_dbgText;
 

@@ -88,7 +88,7 @@ void Mesh::submit(::bgfx::ViewId _id, ::bgfx::ProgramHandle _program, const floa
 	}
 }
 
-void Mesh::submit(const MeshState*const* _state, uint8_t _numPasses, const float* _mtx, uint16_t _numMatrices) const
+void Mesh::submit(MeshState _state[], uint8_t _numPasses, const float* _mtx, uint16_t _numMatrices) const
 {
 	uint32_t cached = ::bgfx::setTransform(_mtx, _numMatrices);
 
@@ -96,7 +96,7 @@ void Mesh::submit(const MeshState*const* _state, uint8_t _numPasses, const float
 	{
 		::bgfx::setTransform(cached, _numMatrices);
 
-		const MeshState& state = *_state[pass];
+		const MeshState& state = _state[pass];
 		::bgfx::setState(state.m_state);
 
 		for (uint8_t tex = 0; tex < state.m_numTextures; ++tex)
