@@ -50,12 +50,12 @@ static PosColorVertex s_cubeVertices[] =
 
 static PosColorVertex s_coorVertices[] =
 {
-	{1000.0f,  0.0f,  0.0f, 0xff0000ff },
+	{1000.0f,  0.0f,  0.0f, 0xff00ff00 },
 	{-1000.0f,  0.0f,  0.0f, 0xff00ff00 },
-	 {0.0f,  1000.0f,  0.0f, 0xff0000ff },
-	 {0.0f,  -1000.0f,  0.0f, 0xff0000ff },
-	 {0.0f,  0.0f,  1000.0f, 0xff0000ff },
-	 {0.0f,  0.0f,  -1000.0f, 0xff0000ff },
+	 {0.0f,  1000.0f,  0.0f, 0xff00ff00 },
+	 {0.0f,  -1000.0f,  0.0f, 0xff00ff00 },
+	 {0.0f,  0.0f,  1000.0f, 0xff00ff00 },
+	 {0.0f,  0.0f,  -1000.0f, 0xff00ff00 },
 };
 
 static const uint16_t s_coorList[] =
@@ -280,8 +280,8 @@ void Cube::update(const uint64_t & frame_)
 
 		bgfx::dbgTextPrintf(0, 10, 0x0f, m_dbgText.c_str());
 
-		const bx::Vec3 at = { 2.0f + m_atX, 4.0f + m_atY,  m_atZ };
-		const bx::Vec3 eye = { -13.0f + m_eyeX,  m_eyeY,  m_eyeZ };
+		const bx::Vec3 at = { m_atX, m_atY,  m_atZ };
+		const bx::Vec3 eye = { m_eyeX,  m_eyeY,  m_eyeZ };
 
 		{
 			float view[16];
@@ -296,7 +296,6 @@ void Cube::update(const uint64_t & frame_)
 
 		for (uint8_t ii = 0; ii < 4; ++ii)
 		{
-
 			m_columnMesh.submit(0, m_program, columnMtx[ii], BGFX_STATE_DEFAULT);
 		}
 		//m_floorMesh.submit(0, m_program_TextureLighting, floorMtx, BGFX_STATE_DEFAULT);

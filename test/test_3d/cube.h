@@ -26,11 +26,11 @@ public:
 		m_mouseY(0),
 		m_deltaX(0),
 		m_deltaY(0),
-		m_eyeX(0.0f),
+		m_eyeX(-13.0f),
 		m_eyeY(0.0f),
 		m_eyeZ(0.0f),
-		m_atX(0.0f),
-		m_atY(0.0f),
+		m_atX(2.0f),
+		m_atY(4.0f),
 		m_atZ(0.0f),
 		m_key(-1),
 		m_mousePressed(false) 
@@ -84,7 +84,28 @@ public:
 	void mousePressed() { m_mousePressed = true; }
 	void mouseRelease() { m_mousePressed = false; }
 
-	void setKey(const int &key_) { m_key = key_; }
+	void setKey(const int &key_)
+	{
+		if (key_ == 35) // Num9
+		{
+			m_eyeX = -13.0f;
+			m_eyeY = 0.0f;
+			m_eyeZ = -0.0f;
+			m_atX = 2.0f;
+			m_atY = 4.0f;
+			m_atZ = 0.0f;
+		}
+		else if (key_ == 26) // Num0
+		{
+			m_eyeX = 0.0f;
+			m_eyeY = 0.0f;
+			m_eyeZ = 0.0f;
+			m_atX = 0.0f;
+			m_atY = 0.0f;
+			m_atZ = 0.0f;
+		}
+		m_key = key_;
+	}
 
 private:
 	bool m_ready;
