@@ -26,13 +26,13 @@ sxb_add_executable(
 )
 
 if(SXB_OS_WINDOWS)
-    target_link_libraries(sfml-window PRIVATE winmm gdi32)
+    target_link_libraries(${PROJECT_NAME} PRIVATE winmm gdi32)
 elseif(SXB_OS_MACOSX)
-    target_link_libraries(sfml-window PRIVATE "-framework Foundation" "-framework AppKit" "-framework IOKit" "-framework Carbon")
+    target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework AppKit" "-framework IOKit" "-framework Carbon")
 elseif(SXB_OS_IOS)
-	#target_link_libraries(sfml-window PRIVATE "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion")
+	target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion")
 elseif(SXB_OS_ANDROID)
-    target_link_libraries(sfml-window PRIVATE android)
+    target_link_libraries(${PROJECT_NAME} PRIVATE android)
 endif()
 
 

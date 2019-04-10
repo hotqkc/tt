@@ -19,6 +19,21 @@ int main(int argc, char** argv)
     // Important: "SFAppDelegate" must always match the name of the
     // application delegate class defined in sfml-window
     
+    // Create the main window
+//    sf::WindowBase window(sf::VideoMode(800, 600), "SFML window");
+//
+//    // Start the game loop
+//    while (window.isOpen())
+//    {
+//        // Process events
+//        sf::Event event;
+//        while (window.pollEvent(event))
+//        {
+//            // Close window: exit
+//            if (event.type == sf::Event::Closed)
+//                window.close();
+//        }
+//    }
     return UIApplicationMain(argc, argv, nil, @"SFAppDelegate");
 }
 
