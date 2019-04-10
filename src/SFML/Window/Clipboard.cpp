@@ -25,45 +25,24 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Window/Mouse.hpp>
-#include <SFML/Window/InputImpl.hpp>
-#include <SFML/Window/Window.hpp>
+#include <SFML/Window/Clipboard.hpp>
+#include <SFML/Window/ClipboardImpl.hpp>
+#include <SFML/System/String.hpp>
 
 
 namespace sf
 {
 ////////////////////////////////////////////////////////////
-bool Mouse::isButtonPressed(Button button)
+String Clipboard::getString()
 {
-    return priv::InputImpl::isMouseButtonPressed(button);
+    return priv::ClipboardImpl::getString();
 }
 
 
 ////////////////////////////////////////////////////////////
-Vector2i Mouse::getPosition()
+void Clipboard::setString(const String& text)
 {
-    return priv::InputImpl::getMousePosition();
-}
-
-
-////////////////////////////////////////////////////////////
-Vector2i Mouse::getPosition(const WindowBase& relativeTo)
-{
-    return priv::InputImpl::getMousePosition(relativeTo);
-}
-
-
-////////////////////////////////////////////////////////////
-void Mouse::setPosition(const Vector2i& position)
-{
-    priv::InputImpl::setMousePosition(position);
-}
-
-
-////////////////////////////////////////////////////////////
-void Mouse::setPosition(const Vector2i& position, const WindowBase& relativeTo)
-{
-    priv::InputImpl::setMousePosition(position, relativeTo);
+    return priv::ClipboardImpl::setString(text);
 }
 
 } // namespace sf

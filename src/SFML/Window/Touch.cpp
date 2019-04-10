@@ -25,45 +25,30 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Window/Mouse.hpp>
+#include <SFML/Window/Touch.hpp>
 #include <SFML/Window/InputImpl.hpp>
-#include <SFML/Window/Window.hpp>
 
 
 namespace sf
 {
 ////////////////////////////////////////////////////////////
-bool Mouse::isButtonPressed(Button button)
+bool Touch::isDown(unsigned int finger)
 {
-    return priv::InputImpl::isMouseButtonPressed(button);
+    return priv::InputImpl::isTouchDown(finger);
 }
 
 
 ////////////////////////////////////////////////////////////
-Vector2i Mouse::getPosition()
+Vector2i Touch::getPosition(unsigned int finger)
 {
-    return priv::InputImpl::getMousePosition();
+    return priv::InputImpl::getTouchPosition(finger);
 }
 
 
 ////////////////////////////////////////////////////////////
-Vector2i Mouse::getPosition(const WindowBase& relativeTo)
+Vector2i Touch::getPosition(unsigned int finger, const WindowBase& relativeTo)
 {
-    return priv::InputImpl::getMousePosition(relativeTo);
-}
-
-
-////////////////////////////////////////////////////////////
-void Mouse::setPosition(const Vector2i& position)
-{
-    priv::InputImpl::setMousePosition(position);
-}
-
-
-////////////////////////////////////////////////////////////
-void Mouse::setPosition(const Vector2i& position, const WindowBase& relativeTo)
-{
-    priv::InputImpl::setMousePosition(position, relativeTo);
+    return priv::InputImpl::getTouchPosition(finger, relativeTo);
 }
 
 } // namespace sf

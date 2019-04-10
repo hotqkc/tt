@@ -22,48 +22,24 @@
 //
 ////////////////////////////////////////////////////////////
 
+#ifndef SFML_CLIPBOARDIMPL_HPP
+#define SFML_CLIPBOARDIMPL_HPP
+
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Window/Mouse.hpp>
-#include <SFML/Window/InputImpl.hpp>
-#include <SFML/Window/Window.hpp>
+#include <SFML/Config.hpp>
 
+#if defined(SFML_SYSTEM_WINDOWS)
+    #include <SFML/Window/Win32/ClipboardImpl.hpp>
+#elif defined(SFML_SYSTEM_LINUX) || defined(SFML_SYSTEM_FREEBSD) || defined(SFML_SYSTEM_OPENBSD)
+    #include <SFML/Window/Unix/ClipboardImpl.hpp>
+#elif defined(SFML_SYSTEM_MACOS)
+    #include <SFML/Window/OSX/ClipboardImpl.hpp>
+#elif defined(SFML_SYSTEM_IOS)
+    #include <SFML/Window/iOS/ClipboardImpl.hpp>
+#elif defined(SFML_SYSTEM_ANDROID)
+    #include <SFML/Window/Android/ClipboardImpl.hpp>
+#endif
 
-namespace sf
-{
-////////////////////////////////////////////////////////////
-bool Mouse::isButtonPressed(Button button)
-{
-    return priv::InputImpl::isMouseButtonPressed(button);
-}
-
-
-////////////////////////////////////////////////////////////
-Vector2i Mouse::getPosition()
-{
-    return priv::InputImpl::getMousePosition();
-}
-
-
-////////////////////////////////////////////////////////////
-Vector2i Mouse::getPosition(const WindowBase& relativeTo)
-{
-    return priv::InputImpl::getMousePosition(relativeTo);
-}
-
-
-////////////////////////////////////////////////////////////
-void Mouse::setPosition(const Vector2i& position)
-{
-    priv::InputImpl::setMousePosition(position);
-}
-
-
-////////////////////////////////////////////////////////////
-void Mouse::setPosition(const Vector2i& position, const WindowBase& relativeTo)
-{
-    priv::InputImpl::setMousePosition(position, relativeTo);
-}
-
-} // namespace sf
+#endif // SFML_CLIPBOARDIMPL_HPP

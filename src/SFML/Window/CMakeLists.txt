@@ -44,6 +44,14 @@ set(DIR_SRCS
 			${INCROOT}/Clipboard.hpp
 			${INCROOT}/Touch.hpp
 			${INCROOT}/Window.hpp
+			${SRCROOT}/Clipboard.cpp
+            ${SRCROOT}/ClipboardImpl.hpp
+            ${SRCROOT}/EGLCheck.cpp
+            ${SRCROOT}/EGLCheck.hpp
+            ${SRCROOT}/EglContext.cpp
+            ${SRCROOT}/EglContext.hpp
+            ${SRCROOT}/Touch.cpp
+            ${SRCROOT}/Window.cpp
 )
 			 
 # add platform specific sources

@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2019 Laurent Gomila (laurent@sfml-dev.org)
+// Copyright (C) 2013 Jonathan De Wachter (dewachter.jonathan@gmail.com)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -22,48 +22,47 @@
 //
 ////////////////////////////////////////////////////////////
 
+#ifndef SFML_EGLCHECK_HPP
+#define SFML_EGLCHECK_HPP
+
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Window/Mouse.hpp>
-#include <SFML/Window/InputImpl.hpp>
-#include <SFML/Window/Window.hpp>
+#include <SFML/Config.hpp>
+#include <EGL/egl.h>
+#include <string>
 
 
 namespace sf
 {
-////////////////////////////////////////////////////////////
-bool Mouse::isButtonPressed(Button button)
+namespace priv
 {
-    return priv::InputImpl::isMouseButtonPressed(button);
-}
-
-
 ////////////////////////////////////////////////////////////
-Vector2i Mouse::getPosition()
-{
-    return priv::InputImpl::getMousePosition();
-}
-
-
+/// Let's define a macro to quickly check every EGL API call
 ////////////////////////////////////////////////////////////
-Vector2i Mouse::getPosition(const WindowBase& relativeTo)
-{
-    return priv::InputImpl::getMousePosition(relativeTo);
-}
+#ifdef SFML_DEBUG
 
+    //// In debug mode, perform a test on every EGL call
+    #define eglCheck(x) x; sf::priv::eglCheckError(__FILE__, __LINE__);
+
+#else
+
+    // Else, we don't add any overhead
+    #define eglCheck(x) (x)
+
+#endif
 
 ////////////////////////////////////////////////////////////
-void Mouse::setPosition(const Vector2i& position)
-{
-    priv::InputImpl::setMousePosition(position);
-}
-
-
+/// \brief Check the last EGL error
+///
+/// \param file Source file where the call is located
+/// \param line Line number of the source file where the call is located
+///
 ////////////////////////////////////////////////////////////
-void Mouse::setPosition(const Vector2i& position, const WindowBase& relativeTo)
-{
-    priv::InputImpl::setMousePosition(position, relativeTo);
-}
+void eglCheckError(const char* file, unsigned int line);
 
+} // namespace priv
 } // namespace sf
+
+
+#endif // SFML_EGLCHECK_HPP
