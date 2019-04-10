@@ -5,36 +5,15 @@
 
 #include <SFML/Config.hpp>
 
-//#ifdef SFML_SYSTEM_IOS
+#import <UIKit/UIKit.h>
 
-#include <UIKit/UIKit.h>
+#include <SFML/Window/iOS/SFAppDelegate.hpp>
 
+#include "AppDelegate.h"
 
-////////////////////////////////////////////////////////////
-int main(int argc, char** argv)
-{
-    // Note: we intentionally drop command line arguments,
-    // there's no such thing as a command line on an iOS device :)
-    
-    // Important: "SFAppDelegate" must always match the name of the
-    // application delegate class defined in sfml-window
-    
-    // Create the main window
-//    sf::WindowBase window(sf::VideoMode(800, 600), "SFML window");
-//
-//    // Start the game loop
-//    while (window.isOpen())
-//    {
-//        // Process events
-//        sf::Event event;
-//        while (window.pollEvent(event))
-//        {
-//            // Close window: exit
-//            if (event.type == sf::Event::Closed)
-//                window.close();
-//        }
-//    }
-    return UIApplicationMain(argc, argv, nil, @"SFAppDelegate");
+int main(int argc, char * argv[]) {
+    @autoreleasepool {
+        //return UIApplicationMain(argc, argv, nil, @"SFAppDelegate");
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([SFAppDelegate class]));
+    }
 }
-
-//#endif // SFML_SYSTEM_IOS

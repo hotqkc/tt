@@ -217,7 +217,6 @@ include_directories(${INC_DIR})
 
 sxb_add_library(
 				${PROJECT_NAME} 
-				SHARED INSTALL 
 				FOLDER "libs" 
 				SOURCES ${DIR_SRCS} ${PLATFORM_SRC}
 )

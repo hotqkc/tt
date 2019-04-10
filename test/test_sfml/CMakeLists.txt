@@ -8,7 +8,16 @@ set(SRCROOT ${CMAKE_ROOT_DIR}/test/test_sfml)
 
 set(DIR_SRCS 
 	${SRCROOT}/main.mm
+	${SRCROOT}/AppDelegate.h
+	${SRCROOT}/AppDelegate.mm
+	${SRCROOT}/ViewController.h
+	${SRCROOT}/ViewController.mm
 )
+
+set(INC_DIR
+    ${CMAKE_ROOT_DIR}/src
+)
+include_directories(${INC_DIR})
 
 set(LINK_LIBS 
 	#bx
