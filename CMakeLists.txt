@@ -36,6 +36,14 @@ if(SXB_OS_MACOS)
     # add an option to automatically install Xcode templates
     sfml_set_option(SFML_INSTALL_XCODE_TEMPLATES FALSE BOOL "TRUE to automatically install the Xcode templates, FALSE to do nothing about it. The templates are compatible with Xcode 4 and 5.")
 endif()
+
+sfml_set_option(SFML_OPENGL_ES ${OPENGL_ES} BOOL "TRUE to use an OpenGL ES implementation, FALSE to use a desktop OpenGL implementation")
+
+# define SFML_OPENGL_ES if needed
+if(SFML_OPENGL_ES)
+    add_definitions(-DSFML_OPENGL_ES)
+    add_definitions(-DGL_GLEXT_PROTOTYPES)
+endif()
 #############
 
 add_subdirectory("src")
