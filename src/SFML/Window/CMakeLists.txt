@@ -227,6 +227,8 @@ if(SXB_OS_WINDOWS)
 	target_link_libraries(${PROJECT_NAME} PRIVATE winmm gdi32)
 elseif(SXB_OS_MACOS)
 	target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework AppKit" "-framework IOKit" "-framework Carbon" -ObjC)
+elseif(SXB_OS_IOS)
+	target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion")
 endif()
 
 if(SFML_OPENGL_ES)
