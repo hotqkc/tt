@@ -1,6 +1,9 @@
 
 set(PROJECT_NAME bgfx)
 
+set(CMAKE_C_COMPILER g++)
+add_compile_options(-std=c++1y)
+
 set(INCROOT ${CMAKE_ROOT_DIR}/include/bgfx)
 set(SRCROOT ${CMAKE_ROOT_DIR}/src/bgfx)
 

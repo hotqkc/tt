@@ -8,8 +8,8 @@ set(VERSION_PATCH 1)
 
 set(CMAKE_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}")
 
-set(CMAKE_C_COMPILER g++)
-add_compile_options(-std=c++1y)
+#set(CMAKE_C_COMPILER g++)
+#add_compile_options(-std=c++1y)
 
 include(${CMAKE_ROOT_DIR}/cmake/Config.cmake)
 include(${CMAKE_ROOT_DIR}/cmake/Macros.cmake)
