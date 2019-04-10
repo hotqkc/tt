@@ -27,7 +27,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <SFML/Window/VideoMode.hpp>
-#include <SFML/Window/WindowBase.hpp>
+#include <SFML/Window/Window.hpp>
 #include <SFML/Window/OSX/InputImpl.hpp>
 #include <SFML/Window/OSX/HIDInputManager.hpp>
 #include <SFML/System/Err.hpp>

@@ -111,9 +111,7 @@ elseif(SXB_OS_MACOS)
 		${SRCROOT}/OSX/SensorImpl.hpp
 		${SRCROOT}/OSX/SensorImpl.cpp
 		${SRCROOT}/OSX/SFApplication.h
-        ${SRCROOT}/OSX/SFApplication.mm
 		${SRCROOT}/OSX/SFApplicationDelegate.h
-		${SRCROOT}/OSX/SFApplicationDelegate.mm
 		${SRCROOT}/OSX/SFContext.hpp
 		${SRCROOT}/OSX/SFContext.mm
 		${SRCROOT}/OSX/SFKeyboardModifiersHelper.h
@@ -123,16 +121,22 @@ elseif(SXB_OS_MACOS)
 		${SRCROOT}/OSX/SFOpenGLView+mouse.mm
         ${SRCROOT}/OSX/SFOpenGLView+mouse_priv.h
         ${SRCROOT}/OSX/SFSilentResponder.h
-        ${SRCROOT}/OSX/SFSilentResponder.mm
 		${SRCROOT}/OSX/SFWindowController.h
 		${SRCROOT}/OSX/SFWindowController.mm
 		${SRCROOT}/OSX/SFViewController.h
 		${SRCROOT}/OSX/SFViewController.mm
 		${SRCROOT}/OSX/SFWindow.h
-		${SRCROOT}/OSX/SFWindow.mm
 		${SRCROOT}/OSX/WindowImplCocoa.hpp
 		${SRCROOT}/OSX/WindowImplCocoa.mm
 		${SRCROOT}/OSX/WindowImplDelegateProtocol.h
+        ${SRCROOT}/OSX/ClipboardImpl.hpp
+        ${SRCROOT}/OSX/ClipboardImpl.mm
+        ${SRCROOT}/OSX/SFOpenGLView+keyboard.mm
+        ${SRCROOT}/OSX/SFOpenGLView+keyboard_priv.h
+        ${SRCROOT}/OSX/SFSilentResponder.m
+        ${SRCROOT}/OSX/SFWindow.m
+        ${SRCROOT}/OSX/SFApplicationDelegate.m
+        ${SRCROOT}/OSX/SFApplication.m
 	)
 	source_group("mac" FILES ${PLATFORM_SRC})
 elseif(SXB_OS_IOS)
