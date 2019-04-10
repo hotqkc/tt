@@ -25,41 +25,77 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/System/Unix/ThreadLocalImpl.hpp>
+#include <SFML/System/MemoryInputStream.hpp>
+#include <cstring>
 
 
 namespace sf
 {
-namespace priv
-{
 ////////////////////////////////////////////////////////////
-ThreadLocalImpl::ThreadLocalImpl() :
-m_key(0)
+MemoryInputStream::MemoryInputStream() :
+m_data  (NULL),
+m_size  (0),
+m_offset(0)
 {
-    pthread_key_create(&m_key, NULL);
 }
 
 
 ////////////////////////////////////////////////////////////
-ThreadLocalImpl::~ThreadLocalImpl()
+void MemoryInputStream::open(const void* data, std::size_t sizeInBytes)
 {
-    pthread_key_delete(m_key);
+    m_data = static_cast<const char*>(data);
+    m_size = sizeInBytes;
+    m_offset = 0;
 }
 
 
 ////////////////////////////////////////////////////////////
-void ThreadLocalImpl::setValue(void* value)
+Int64 MemoryInputStream::read(void* data, Int64 size)
 {
-    pthread_setspecific(m_key, value);
+    if (!m_data)
+        return -1;
+
+    Int64 endPosition = m_offset + size;
+    Int64 count = endPosition <= m_size ? size : m_size - m_offset;
+
+    if (count > 0)
+    {
+        std::memcpy(data, m_data + m_offset, static_cast<std::size_t>(count));
+        m_offset += count;
+    }
+
+    return count;
 }
 
 
 ////////////////////////////////////////////////////////////
-void* ThreadLocalImpl::getValue() const
+Int64 MemoryInputStream::seek(Int64 position)
 {
-    return pthread_getspecific(m_key);
+    if (!m_data)
+        return -1;
+
+    m_offset = position < m_size ? position : m_size;
+    return m_offset;
 }
 
-} // namespace priv
+
+////////////////////////////////////////////////////////////
+Int64 MemoryInputStream::tell()
+{
+    if (!m_data)
+        return -1;
+
+    return m_offset;
+}
+
+
+////////////////////////////////////////////////////////////
+Int64 MemoryInputStream::getSize()
+{
+    if (!m_data)
+        return -1;
+
+    return m_size;
+}
 
 } // namespace sf

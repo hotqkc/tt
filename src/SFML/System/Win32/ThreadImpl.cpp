@@ -25,7 +25,11 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/System/Unix/ThreadLocalImpl.hpp>
+#include <SFML/System/Win32/ThreadImpl.hpp>
+#include <SFML/System/Thread.hpp>
+#include <SFML/System/Err.hpp>
+#include <cassert>
+#include <process.h>
 
 
 namespace sf
@@ -33,31 +37,55 @@ namespace sf
 namespace priv
 {
 ////////////////////////////////////////////////////////////
-ThreadLocalImpl::ThreadLocalImpl() :
-m_key(0)
+ThreadImpl::ThreadImpl(Thread* owner)
 {
-    pthread_key_create(&m_key, NULL);
+    m_thread = reinterpret_cast<HANDLE>(_beginthreadex(NULL, 0, &ThreadImpl::entryPoint, owner, 0, &m_threadId));
+
+    if (!m_thread)
+        err() << "Failed to create thread" << std::endl;
 }
 
 
 ////////////////////////////////////////////////////////////
-ThreadLocalImpl::~ThreadLocalImpl()
+ThreadImpl::~ThreadImpl()
 {
-    pthread_key_delete(m_key);
+    if (m_thread)
+        CloseHandle(m_thread);
 }
 
 
 ////////////////////////////////////////////////////////////
-void ThreadLocalImpl::setValue(void* value)
+void ThreadImpl::wait()
 {
-    pthread_setspecific(m_key, value);
+    if (m_thread)
+    {
+        assert(m_threadId != GetCurrentThreadId()); // A thread cannot wait for itself!
+        WaitForSingleObject(m_thread, INFINITE);
+    }
 }
 
 
 ////////////////////////////////////////////////////////////
-void* ThreadLocalImpl::getValue() const
+void ThreadImpl::terminate()
 {
-    return pthread_getspecific(m_key);
+    if (m_thread)
+        TerminateThread(m_thread, 0);
+}
+
+
+////////////////////////////////////////////////////////////
+unsigned int __stdcall ThreadImpl::entryPoint(void* userData)
+{
+    // The Thread instance is stored in the user data
+    Thread* owner = static_cast<Thread*>(userData);
+
+    // Forward to the owner
+    owner->run();
+
+    // Optional, but it is cleaner
+    _endthreadex(0);
+
+    return 0;
 }
 
 } // namespace priv

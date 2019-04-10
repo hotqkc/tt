@@ -25,7 +25,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/System/Unix/ThreadLocalImpl.hpp>
+#include <SFML/System/Unix/ThreadImpl.hpp>
+#include <SFML/System/Thread.hpp>
+#include <iostream>
+#include <cassert>
 
 
 namespace sf
@@ -33,31 +36,57 @@ namespace sf
 namespace priv
 {
 ////////////////////////////////////////////////////////////
-ThreadLocalImpl::ThreadLocalImpl() :
-m_key(0)
+ThreadImpl::ThreadImpl(Thread* owner) :
+m_isActive(true)
 {
-    pthread_key_create(&m_key, NULL);
+    m_isActive = pthread_create(&m_thread, NULL, &ThreadImpl::entryPoint, owner) == 0;
+
+    if (!m_isActive)
+        std::cerr << "Failed to create thread" << std::endl;
 }
 
 
 ////////////////////////////////////////////////////////////
-ThreadLocalImpl::~ThreadLocalImpl()
+void ThreadImpl::wait()
 {
-    pthread_key_delete(m_key);
+    if (m_isActive)
+    {
+        assert(pthread_equal(pthread_self(), m_thread) == 0); // A thread cannot wait for itself!
+        pthread_join(m_thread, NULL);
+    }
 }
 
 
 ////////////////////////////////////////////////////////////
-void ThreadLocalImpl::setValue(void* value)
+void ThreadImpl::terminate()
 {
-    pthread_setspecific(m_key, value);
+    if (m_isActive)
+    {
+        #ifndef SFML_SYSTEM_ANDROID
+            pthread_cancel(m_thread);
+        #else
+            // See https://stackoverflow.com/questions/4610086/pthread-cancel-al
+            pthread_kill(m_thread, SIGUSR1);
+        #endif
+    }
 }
 
 
 ////////////////////////////////////////////////////////////
-void* ThreadLocalImpl::getValue() const
+void* ThreadImpl::entryPoint(void* userData)
 {
-    return pthread_getspecific(m_key);
+    // The Thread instance is stored in the user data
+    Thread* owner = static_cast<Thread*>(userData);
+
+    #ifndef SFML_SYSTEM_ANDROID
+        // Tell the thread to handle cancel requests immediately
+        pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+    #endif
+
+    // Forward to the owner
+    owner->run();
+
+    return NULL;
 }
 
 } // namespace priv

@@ -22,44 +22,41 @@
 //
 ////////////////////////////////////////////////////////////
 
+#ifndef SFML_NATIVEACTIVITY_HPP
+#define SFML_NATIVEACTIVITY_HPP
+
+
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/System/Unix/ThreadLocalImpl.hpp>
+#include <SFML/System/Export.hpp>
 
+
+#if !defined(SFML_SYSTEM_ANDROID)
+#error NativeActivity.hpp: This header is Android only.
+#endif
+
+
+struct ANativeActivity;
 
 namespace sf
 {
-namespace priv
-{
 ////////////////////////////////////////////////////////////
-ThreadLocalImpl::ThreadLocalImpl() :
-m_key(0)
-{
-    pthread_key_create(&m_key, NULL);
-}
-
-
+/// \ingroup system
+/// \brief Return a pointer to the Android native activity
+///
+/// You shouldn't have to use this function, unless you want
+/// to implement very specific details, that SFML doesn't
+/// support, or to use a workaround for a known issue.
+///
+/// \return Pointer to Android native activity structure
+///
+/// \sfplatform{Android,SFML/System/NativeActivity.hpp}
+///
 ////////////////////////////////////////////////////////////
-ThreadLocalImpl::~ThreadLocalImpl()
-{
-    pthread_key_delete(m_key);
-}
-
-
-////////////////////////////////////////////////////////////
-void ThreadLocalImpl::setValue(void* value)
-{
-    pthread_setspecific(m_key, value);
-}
-
-
-////////////////////////////////////////////////////////////
-void* ThreadLocalImpl::getValue() const
-{
-    return pthread_getspecific(m_key);
-}
-
-} // namespace priv
+SFML_SYSTEM_API ANativeActivity* getNativeActivity();
 
 } // namespace sf
+
+
+#endif // SFML_NATIVEACTIVITY_HPP

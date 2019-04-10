@@ -25,7 +25,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/System/Unix/ThreadLocalImpl.hpp>
+#include <SFML/System/Win32/ThreadLocalImpl.hpp>
 
 
 namespace sf
@@ -33,31 +33,30 @@ namespace sf
 namespace priv
 {
 ////////////////////////////////////////////////////////////
-ThreadLocalImpl::ThreadLocalImpl() :
-m_key(0)
+ThreadLocalImpl::ThreadLocalImpl()
 {
-    pthread_key_create(&m_key, NULL);
+    m_index = TlsAlloc();
 }
 
 
 ////////////////////////////////////////////////////////////
 ThreadLocalImpl::~ThreadLocalImpl()
 {
-    pthread_key_delete(m_key);
+    TlsFree(m_index);
 }
 
 
 ////////////////////////////////////////////////////////////
 void ThreadLocalImpl::setValue(void* value)
 {
-    pthread_setspecific(m_key, value);
+    TlsSetValue(m_index, value);
 }
 
 
 ////////////////////////////////////////////////////////////
 void* ThreadLocalImpl::getValue() const
 {
-    return pthread_getspecific(m_key);
+    return TlsGetValue(m_index);
 }
 
 } // namespace priv
