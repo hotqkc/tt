@@ -20,13 +20,18 @@ set(INC_DIR
 include_directories(${INC_DIR})
 
 set(LINK_LIBS 
-	#bx
-	#bimg
-	#bgfx
-    sfml-system
-    sfml-window
+	bx
+	bimg
+	bgfx
+	sfml-system
+	sfml-window
 )
 link_libraries(${LINK_LIBS})
+
+Add_Definitions(
+	-D_HAS_ITERATOR_DEBUGGING=0
+	-DHAS_METAL_SDK
+	)
 
 sxb_add_executable(
 				${PROJECT_NAME} 

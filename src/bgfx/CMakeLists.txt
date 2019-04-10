@@ -2,7 +2,7 @@
 set(PROJECT_NAME bgfx)
 
 set(CMAKE_C_COMPILER g++)
-add_compile_options(-std=c++1y)
+add_compile_options(-std=c++1y -fno-objc-arc)
 
 set(INCROOT ${CMAKE_ROOT_DIR}/include/bgfx)
 set(SRCROOT ${CMAKE_ROOT_DIR}/src/bgfx)
@@ -107,6 +107,14 @@ ENDIF()
 			
 include_directories(${INC_DIR})
 
+if(SXB_OS_MACOS)
+	Add_Definitions(-D__STDC_LIMIT_MACROS
+                -D__STDC_FORMAT_MACROS
+                -D__STDC_CONSTANT_MACROS
+				-D_DEBUG
+                -DBGFX_CONFIG_DEBUG=1
+            )
+else()
 Add_Definitions(-D__STDC_LIMIT_MACROS
 				-D__STDC_FORMAT_MACROS
 				-D__STDC_CONSTANT_MACROS
@@ -120,9 +128,12 @@ Add_Definitions(-D__STDC_LIMIT_MACROS
 				-D_CRT_SECURE_NO_DEPRECATE
 				-DBGFX_CONFIG_DEBUG=1
 			)
+endif()
 
 sxb_add_library(
 				${PROJECT_NAME} 
 				FOLDER "libs" 
 				SOURCES ${DIR_SRCS} ${C99_SRCS}
 )
+
+target_link_libraries(${PROJECT_NAME} PUBLIC bx)
