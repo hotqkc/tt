@@ -4,7 +4,7 @@
 build
 build-ios
 build-macos
-build-windows
+build-win
 bin
 lib
 pack
