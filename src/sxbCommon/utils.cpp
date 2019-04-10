@@ -233,7 +233,7 @@ bool Utils::load(const char *prefix_, const char* filePath_, void *& data_, uint
 	all_path = prefix_ + all_path;
 
 	FILE *file = fopen(all_path.c_str(), "rb");
-	char * mesg = strerror(errno);
+	//char * mesg = strerror(errno);
 
 	if (file)
 	{
@@ -257,7 +257,7 @@ const bgfx::Memory* Utils::loadMem(const char *prefix_, const char* filePath_)
 	all_path = prefix_ + all_path;
 
 	FILE *file = fopen(all_path.c_str(), "rb");
-	char * mesg = strerror(errno);
+	//char * mesg = strerror(errno);
 
 	if (file)
 	{
