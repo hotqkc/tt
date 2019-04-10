@@ -41,6 +41,9 @@ set(DIR_SRCS
 			${SRCROOT}/Context.cpp
 			${INCROOT}/GlResource.hpp
 			${SRCROOT}/GlResource.cpp
+			${INCROOT}/Clipboard.hpp
+			${INCROOT}/Touch.hpp
+			${INCROOT}/Window.hpp
 )
 			 
 # add platform specific sources
