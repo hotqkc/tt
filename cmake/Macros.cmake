@@ -65,6 +65,42 @@ macro(sxb_add_executable target)
 	endif()
 endmacro()
 
+function(sfml_add_external)
+    list(GET ARGN 0 target)
+    list(REMOVE_AT ARGN 0)
+
+    if (TARGET ${target})
+        message(FATAL_ERROR "Target '${target}' is already defined")
+    endif()
+
+    cmake_parse_arguments(THIS "" "" "INCLUDE;LINK" ${ARGN})
+    if (THIS_UNPARSED_ARGUMENTS)
+        message(FATAL_ERROR "Unknown arguments when calling sfml_import_library: ${THIS_UNPARSED_ARGUMENTS}")
+    endif()
+
+    add_library(${target} INTERFACE)
+
+    if (THIS_INCLUDE)
+        foreach(include_dir IN LISTS THIS_INCLUDE)
+            if (NOT include_dir)
+                message(FATAL_ERROR "No path given for include dir ${THIS_INCLUDE}")
+            endif()
+            target_include_directories(${target} INTERFACE "$<BUILD_INTERFACE:${include_dir}>")
+        endforeach()
+    endif()
+
+    if (THIS_LINK)
+        foreach(link_item IN LISTS THIS_LINK)
+            if (NOT link_item)
+                message(FATAL_ERROR "Missing item in ${THIS_LINK}")
+            endif()
+            target_link_libraries(${target} INTERFACE "$<BUILD_INTERFACE:${link_item}>")
+        endforeach()
+    endif()
+
+    install(TARGETS ${target} EXPORT SFMLConfigExport)
+endfunction()
+
 function(sfml_find_package)
     list(GET ARGN 0 target)
     list(REMOVE_AT ARGN 0)
