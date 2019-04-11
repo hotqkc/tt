@@ -29,10 +29,28 @@ if(SXB_OS_IOS)
 endif()
 link_libraries(${LINK_LIBS})
 
-#Add_Definitions(
-#-D_HAS_ITERATOR_DEBUGGING=0
-#-DHAS_METAL_SDK
-#)
+Add_Definitions(
+-D_HAS_ITERATOR_DEBUGGING=0
+-DHAS_METAL_SDK
+    -D__STDC_LIMIT_MACROS
+    -D__STDC_FORMAT_MACROS
+    -D__STDC_CONSTANT_MACROS
+    -D_HAS_EXCEPTIONS=0
+    -D_ITERATOR_DEBUG_LEVEL=0
+    -D_SCL_SECURE=0
+    -D_SECURE_SCL=0
+    -D_SCL_SECURE_NO_WARNINGS
+    -D_CRT_SECURE_NO_WARNINGS
+    -D_CRT_SECURE_NO_DEPRECATE
+    -DBGFX_CONFIG_DEBUG=1
+	        -D__STDC_LIMIT_MACROS
+        -D__STDC_FORMAT_MACROS
+        -D__STDC_CONSTANT_MACROS
+        -D_DEBUG
+        -DBGFX_CONFIG_DEBUG=1
+        -D_HAS_ITERATOR_DEBUGGING=0
+        -DHAS_METAL_SDK
+)
 
 sxb_add_executable(
 				${PROJECT_NAME} 
@@ -60,5 +78,5 @@ elseif(SXB_OS_ANDROID)
 endif()
 
 
-target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL)
+#target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL)
 

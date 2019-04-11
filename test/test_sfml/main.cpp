@@ -9,28 +9,38 @@
 #include <SFML/Main.hpp>
 #include <SFML/Window/Event.hpp>
 
-#define SC_WIDTH 1280
-#define SC_HEIGHT 720
+#define SC_WIDTH 1334
+#define SC_HEIGHT 750
 
 int main(int argc, char * argv[]) {
 
-     sf::WindowBase window(sf::VideoMode(SC_WIDTH, SC_HEIGHT), "SFML window");
-    
     bgfx::init();
-    
+    // Create the main window
+    sf::WindowBase window(sf::VideoMode(SC_WIDTH, SC_HEIGHT), "SFML window", sf::Style::None);
+//
+//    bgfx::PlatformData pd;
+//    pd.nwh = window.getSystemHandle();
+//    bgfx::setPlatformData(pd);
+//
+//    bgfx::Init bgfxInit;
+//    bgfxInit.type = bgfx::RendererType::Count; // Automatically choose a renderer.
+//    bgfxInit.resolution.width = SC_WIDTH;
+//    bgfxInit.resolution.height = SC_HEIGHT;
+//    bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
+//    bgfx::init(bgfxInit);
+//
+      // Start the game loop
     while (window.isOpen())
     {
         // Process events
         sf::Event event;
         while (window.pollEvent(event))
-        {      
-
-                if (event.type == sf::Event::Closed)
-                {
-                    window.close();
-                }
+        {
+            // Close window: exit
+            if (event.type == sf::Event::Closed)
+                window.close();
         }
-        //printf("%d\n", bgfx::getRendererType());
+
     }
 
     return 0;
