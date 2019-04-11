@@ -11,7 +11,10 @@ set(DIR_SRCS
 	${SRCROOT}/logo.h
 )
 
-Add_Definitions(-D_HAS_ITERATOR_DEBUGGING=0)
+Add_Definitions(
+	-D_HAS_ITERATOR_DEBUGGING=0
+	-DBGFX_CONFIG_RENDERER_METAL=1
+)
 
 sxb_add_executable(
 				${PROJECT_NAME} 
@@ -24,7 +27,7 @@ if(SXB_OS_WINDOWS)
 elseif(SXB_OS_MACOSX)
     target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework AppKit" "-framework IOKit" "-framework Carbon")
 elseif(SXB_OS_IOS)
-    target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion" "-framework Metal" "-framework OpenGLES")
+	target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion" "-framework Metal" "-framework OpenGLES" "-framework OpenAL")
 elseif(SXB_OS_ANDROID)
     target_link_libraries(${PROJECT_NAME} PRIVATE android)
 endif()
