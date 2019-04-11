@@ -9,12 +9,26 @@
 
 #include <SFML/Window/iOS/SFAppDelegate.hpp>
 
+#include <SFML/Main.hpp>
+
 #include "AppDelegate.h"
 
 int main(int argc, char * argv[]) {
-    @autoreleasepool {
     
-        
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    sf::WindowBase window(sf::VideoMode(800, 600), "SFML window");
+
+    // Start the game loop
+    while (window.isOpen())
+    {
+        // Process events
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // Close window: exit
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
     }
+    
+    return 0;
 }

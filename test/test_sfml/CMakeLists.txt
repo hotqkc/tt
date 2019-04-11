@@ -25,6 +25,7 @@ set(LINK_LIBS
 	bgfx
 	sfml-system
 	sfml-window
+	sfml-main
 )
 link_libraries(${LINK_LIBS})
 
