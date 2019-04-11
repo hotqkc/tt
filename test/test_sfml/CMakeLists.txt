@@ -51,21 +51,19 @@ Add_Definitions(
         -D_HAS_ITERATOR_DEBUGGING=0
         -DHAS_METAL_SDK
 )
-
-sxb_add_executable(
-				${PROJECT_NAME} 
-				FOLDER "test" 
-				SOURCES ${DIR_SRCS}
-)
-
 #set(APP_NAME "test_sfml")
-#set(APP_BUNDLE_IDENTIFIER "com.quku.test_sfml")
+#set(APP_BUNDLE_IDENTIFIER "quku.test_sfml")
 #set(PRODUCT_NAME ${APP_NAME})
 #set(EXECUTABLE_NAME ${APP_NAME})
 #set(MACOSX_BUNDLE_EXECUTABLE_NAME ${APP_NAME})
 #set(MACOSX_BUNDLE_INFO_STRING ${APP_BUNDLE_IDENTIFIER})
 #set(MACOSX_BUNDLE_GUI_IDENTIFIER ${APP_BUNDLE_IDENTIFIER})
 #set(MACOSX_BUNDLE_BUNDLE_NAME ${APP_BUNDLE_IDENTIFIER})
+sxb_add_executable(
+				${PROJECT_NAME} 
+				FOLDER "test" 
+				SOURCES ${DIR_SRCS}
+)
 
 if(SXB_OS_WINDOWS)
     target_link_libraries(${PROJECT_NAME} PRIVATE winmm gdi32)
