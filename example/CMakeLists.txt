@@ -16,6 +16,7 @@ set(EXAMPLE_LINK_LIBS
 	bimg
 	sfml-system
 	sfml-window
+	sfml-main
 	sxbCommon
 )
 

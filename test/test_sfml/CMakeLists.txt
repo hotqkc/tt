@@ -8,10 +8,6 @@ set(SRCROOT ${CMAKE_ROOT_DIR}/test/test_sfml)
 
 set(DIR_SRCS 
 	${SRCROOT}/main.mm
-	${SRCROOT}/AppDelegate.h
-	${SRCROOT}/AppDelegate.mm
-	${SRCROOT}/ViewController.h
-	${SRCROOT}/ViewController.mm
 )
 
 set(INC_DIR
@@ -40,12 +36,21 @@ sxb_add_executable(
 				SOURCES ${DIR_SRCS}
 )
 
+#set(APP_NAME "test_sfml")
+#set(APP_BUNDLE_IDENTIFIER "com.quku.test_sfml")
+#set(PRODUCT_NAME ${APP_NAME})
+#set(EXECUTABLE_NAME ${APP_NAME})
+#set(MACOSX_BUNDLE_EXECUTABLE_NAME ${APP_NAME})
+#set(MACOSX_BUNDLE_INFO_STRING ${APP_BUNDLE_IDENTIFIER})
+#set(MACOSX_BUNDLE_GUI_IDENTIFIER ${APP_BUNDLE_IDENTIFIER})
+#set(MACOSX_BUNDLE_BUNDLE_NAME ${APP_BUNDLE_IDENTIFIER})
+
 if(SXB_OS_WINDOWS)
     target_link_libraries(${PROJECT_NAME} PRIVATE winmm gdi32)
 elseif(SXB_OS_MACOSX)
     target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework AppKit" "-framework IOKit" "-framework Carbon")
 elseif(SXB_OS_IOS)
-	target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion" "-framework Metal")
+	target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion" "-framework Metal" "-framework OpenGLES")
 elseif(SXB_OS_ANDROID)
     target_link_libraries(${PROJECT_NAME} PRIVATE android)
 endif()

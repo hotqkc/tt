@@ -9,6 +9,8 @@
 
 #include <sxbTop/defines.h>
 
+#include <SFML/Main.hpp>
+
 #include "logo.h"
 
 int main(int argc, char *argv[])
