@@ -8,9 +8,6 @@ set(VERSION_PATCH 1)
 
 set(CMAKE_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}")
 
-#set(CMAKE_C_COMPILER g++)
-#add_compile_options(-std=c++1y)
-
 include(${CMAKE_ROOT_DIR}/cmake/Config.cmake)
 include(${CMAKE_ROOT_DIR}/cmake/Macros.cmake)
 
@@ -60,7 +57,9 @@ set(PROJECT_VERSION_FULL ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 set(CPACK_SOURCE_IGNORE_FILES
         ${CMAKE_ROOT_DIR}/bin
         ${CMAKE_ROOT_DIR}/lib
-        ${CMAKE_ROOT_DIR}/build
+        ${CMAKE_ROOT_DIR}/build-win
+        ${CMAKE_ROOT_DIR}/build-ios
+        ${CMAKE_ROOT_DIR}/build-macos
         ${CMAKE_ROOT_DIR}/pack
         ${CMAKE_ROOT_DIR}/.DS_Store
         ${CMAKE_ROOT_DIR}/.vs
