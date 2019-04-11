@@ -113,6 +113,8 @@ if(SXB_OS_MACOS)
                 -D__STDC_CONSTANT_MACROS
 				-D_DEBUG
                 -DBGFX_CONFIG_DEBUG=1
+				-D_HAS_ITERATOR_DEBUGGING=0
+				-DHAS_METAL_SDK
             )
 else()
 Add_Definitions(-D__STDC_LIMIT_MACROS

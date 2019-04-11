@@ -21,8 +21,12 @@ set(LINK_LIBS
 	bgfx
 	sfml-system
 	sfml-window
-	sfml-main
 )
+if(SXB_OS_IOS)
+    set(LINK_LIBS ${LINK_LIBS}
+        sfml-main
+    )
+endif()
 link_libraries(${LINK_LIBS})
 
 Add_Definitions(
@@ -47,10 +51,10 @@ sxb_add_executable(
 
 if(SXB_OS_WINDOWS)
     target_link_libraries(${PROJECT_NAME} PRIVATE winmm gdi32)
-elseif(SXB_OS_MACOSX)
-    target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework AppKit" "-framework IOKit" "-framework Carbon")
+elseif(SXB_OS_MACOS)
+	target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework AppKit" "-framework IOKit" "-framework Carbon" "-framework Metal" "-framework QuartzCore")
 elseif(SXB_OS_IOS)
-	target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion" "-framework Metal" "-framework OpenGLES")
+	target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion" "-framework Metal")
 elseif(SXB_OS_ANDROID)
     target_link_libraries(${PROJECT_NAME} PRIVATE android)
 endif()
