@@ -1,6 +1,9 @@
 
 set(PROJECT_NAME test_3d)
 
+set(CMAKE_C_COMPILER g++)
+add_compile_options(-std=c++1y)
+
 set(SRCROOT ${CMAKE_ROOT_DIR}/test/test_3d)
 
 set(DIR_SRCS 
@@ -23,6 +26,11 @@ set(LINK_LIBS
 	sfml-window
 	sxbCommon
 )
+if(SXB_OS_IOS)
+    set(LINK_LIBS ${LINK_LIBS}
+        sfml-main
+    )
+endif()
 
 include_directories(${INC_DIR})
 link_libraries(${LINK_LIBS})
@@ -34,3 +42,13 @@ sxb_add_executable(
 				FOLDER "test" 
 				SOURCES ${DIR_SRCS}
 )
+
+if(SXB_OS_WINDOWS)
+    target_link_libraries(${PROJECT_NAME} PRIVATE winmm gdi32)
+elseif(SXB_OS_MACOS)
+    target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework AppKit" "-framework IOKit" "-framework Carbon" "-framework Metal" "-framework QuartzCore")
+elseif(SXB_OS_IOS)
+    target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion" "-framework Metal" "-framework OpenGLES" "-framework OpenAL")
+elseif(SXB_OS_ANDROID)
+    target_link_libraries(${PROJECT_NAME} PRIVATE android)
+endif()
