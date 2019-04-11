@@ -90,11 +90,20 @@ set(INC_DIR
 
 include_directories(${INC_DIR})
 
+if(SXB_OS_WINDOWS)
+sxb_add_library(
+				${PROJECT_NAME} 
+				SHARED INSTALL
+				FOLDER "libs" 
+				SOURCES ${DIR_SRCS} ${PLATFORM_SRC}
+)
+else()
 sxb_add_library(
 				${PROJECT_NAME} 
 				FOLDER "libs" 
 				SOURCES ${DIR_SRCS} ${PLATFORM_SRC}
 )
+endif()
 
 if(SXB_OS_WINDOWS)
 	target_link_libraries(${PROJECT_NAME} PRIVATE winmm)

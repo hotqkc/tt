@@ -3,7 +3,7 @@
 
 #include <bx/macros.h>
 //#include <bx/allocator.h>
-#include <bx/compat/ios/malloc.h>
+//#include <bx/compat/ios/malloc.h>
 #include <bx/uint32_t.h>
 
 #include <bimg/decode.h>

@@ -13,6 +13,11 @@ set(DIR_SRCS
 set(INC_DIR
     ${CMAKE_ROOT_DIR}/src
 )
+IF (SXB_OS_WINDOWS)
+	set(INC_DIR ${INC_DIR} ${CMAKE_ROOT_DIR}/include/bx/compat/msvc)
+ELSEIF (SXB_OS_MACOS)
+	set(INC_DIR ${INC_DIR} ${CMAKE_ROOT_DIR}/include/bx/compat/osx)
+ENDIF()
 include_directories(${INC_DIR})
 
 set(LINK_LIBS 
