@@ -7,7 +7,7 @@ add_compile_options(-std=c++1y)
 set(SRCROOT ${CMAKE_ROOT_DIR}/test/test_sfml)
 
 set(DIR_SRCS 
-	${SRCROOT}/main.mm
+	${SRCROOT}/main.cpp
 )
 
 set(INC_DIR
@@ -29,10 +29,10 @@ if(SXB_OS_IOS)
 endif()
 link_libraries(${LINK_LIBS})
 
-Add_Definitions(
-	-D_HAS_ITERATOR_DEBUGGING=0
-	-DHAS_METAL_SDK
-	)
+#Add_Definitions(
+#-D_HAS_ITERATOR_DEBUGGING=0
+#-DHAS_METAL_SDK
+#)
 
 sxb_add_executable(
 				${PROJECT_NAME} 
