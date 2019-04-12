@@ -7,7 +7,13 @@ add_compile_options(-std=c++1y)
 set(SRCROOT ${CMAKE_ROOT_DIR}/test/test_sfml)
 
 set(DIR_SRCS 
-	${SRCROOT}/main.cpp
+	${SRCROOT}/main.mm
+	${SRCROOT}/AppDelegate.h
+	${SRCROOT}/AppDelegate.mm
+	${SRCROOT}/ViewController.h
+	${SRCROOT}/ViewController.mm
+	${SRCROOT}/CppInterface.h
+	${SRCROOT}/CppInterface.mm
 )
 
 set(INC_DIR
@@ -75,7 +81,7 @@ if(SXB_OS_WINDOWS)
 elseif(SXB_OS_MACOS)
 	target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework AppKit" "-framework IOKit" "-framework Carbon" "-framework Metal" "-framework QuartzCore")
 elseif(SXB_OS_IOS)
-	target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion" "-framework Metal")
+	target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion" "-framework Metal""-framework OpenGLES")
 elseif(SXB_OS_ANDROID)
     target_link_libraries(${PROJECT_NAME} PRIVATE android)
 endif()
