@@ -35,6 +35,10 @@ int main(int argc, char *argv[])
 	 bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
 	 bgfx::setViewRect(0, 0, 0, WNDW_WIDTH, WNDW_HEIGHT);
 
+     uint64_t count = 0;
+     int mouse_x =  0;
+     int mouse_y = 0;
+     
      // Start the game loop
      while (window.isOpen())
      {
@@ -45,6 +49,8 @@ int main(int argc, char *argv[])
              // Close window: exit
              if (event.type == sf::Event::Closed)
                  window.close();
+             else if (event.type == sf::Event::TouchMoved)
+                 mouse_x = event.touch.x, mouse_y = event.touch.y;
          }
 
 		 bgfx::touch(0);
@@ -63,6 +69,11 @@ int main(int argc, char *argv[])
 
 		 bgfx::dbgTextPrintf(80, 1, 0x0f, "\x1b[;0m    \x1b[;1m    \x1b[; 2m    \x1b[; 3m    \x1b[; 4m    \x1b[; 5m    \x1b[; 6m    \x1b[; 7m    \x1b[0m");
 		 bgfx::dbgTextPrintf(80, 2, 0x0f, "\x1b[;8m    \x1b[;9m    \x1b[;10m    \x1b[;11m    \x1b[;12m    \x1b[;13m    \x1b[;14m    \x1b[;15m    \x1b[0m");
+         
+         bgfx::dbgTextPrintf(0, 5, 0x0f, "                                    ");
+         bgfx::dbgTextPrintf(0, 7, 0x0f, "                                    ");
+         bgfx::dbgTextPrintf(0, 5, 0x0f, "%d", count);
+         bgfx::dbgTextPrintf(0, 7, 0x0f, "(%d, %d)", mouse_x, mouse_y);
 
 		 const bgfx::Stats* stats = bgfx::getStats();
 		 bgfx::dbgTextPrintf(0, 2, 0x0f, "Backbuffer %dW x %dH in pixels, debug text %dW x %dH in characters."
@@ -73,6 +84,7 @@ int main(int argc, char *argv[])
 		 );
 
 		 bgfx::frame();
+         count++;
      }
 
      return EXIT_SUCCESS;
