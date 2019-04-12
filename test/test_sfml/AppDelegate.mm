@@ -52,15 +52,15 @@
     bgfx::setPlatformData(pd);
 
     bgfx::Init bgfxInit;
-    bgfxInit.type = bgfx::RendererType::Metal; // Automatically choose a renderer.
-//    bgfxInit.resolution.width = 1280;
-//    bgfxInit.resolution.height = 720;
+    bgfxInit.type = bgfx::RendererType::Count; // Automatically choose a renderer.
+    bgfxInit.resolution.width = 1280;
+    bgfxInit.resolution.height = 720;
     bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
     bgfx::init(bgfxInit);
     bgfx::setDebug(BGFX_DEBUG_TEXT);
     
     bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
-//    bgfx::setViewRect(0, 0, 0, 1280, 720);
+    bgfx::setViewRect(0, 0, 0, 1280, 720);
     
     [self.window makeKeyAndVisible];
     
