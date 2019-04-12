@@ -14,5 +14,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ViewController *vc;
-
+@property (strong, nonatomic) CAMetalLayer *metalLayer;
+@property (strong, nonatomic) id<MTLDevice> device;
 @end

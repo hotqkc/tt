@@ -21,6 +21,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.device = MTLCreateSystemDefaultDevice();
+    self.metalLayer = [CAMetalLayer new];
+    
+    self.metalLayer.device = self.device;
+
     self.window = [[UIWindow alloc] initWithFrame:
                    [[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -29,9 +35,11 @@
     [self.window setRootViewController:nav];
     
     [self.window makeKeyAndVisible];
+    
+    [self.window.layer addSublayer:self.metalLayer];
 
     bgfx::PlatformData pd;
-    pd.nwh = (__bridge void *)self.window;
+    pd.nwh = (__bridge void *)self.metalLayer;
     bgfx::setPlatformData(pd);
 
     bgfx::Init bgfxInit;
@@ -40,6 +48,10 @@
     bgfxInit.resolution.height = 720;
     bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
     bgfx::init(bgfxInit);
+    bgfx::setDebug(BGFX_DEBUG_TEXT);
+    
+    bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
+    bgfx::setViewRect(0, 0, 0, 1280, 720);
     return YES;
 }
 
