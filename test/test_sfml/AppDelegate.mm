@@ -10,6 +10,8 @@
 #include "bgfx/platform.h"
 #include "bx/bx.h"
 
+#import <Metal/MTLBuffer.h>
+
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -34,7 +36,16 @@
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:self.vc];
     [self.window setRootViewController:nav];
     
-    [self.window makeKeyAndVisible];
+    
+    self.metalLayer.frame = self.window.layer.frame;
+    
+    CGSize drawableSize = self.window.bounds.size;
+    
+
+    drawableSize.width *= self.window.contentScaleFactor;
+    drawableSize.height *= self.window.contentScaleFactor;
+    self.metalLayer.drawableSize = drawableSize;
+
     
     [self.window.layer addSublayer:self.metalLayer];
 
@@ -43,7 +54,7 @@
     bgfx::setPlatformData(pd);
 
     bgfx::Init bgfxInit;
-    bgfxInit.type = bgfx::RendererType::Count; // Automatically choose a renderer.
+    bgfxInit.type = bgfx::RendererType::Metal; // Automatically choose a renderer.
     bgfxInit.resolution.width = 1280;
     bgfxInit.resolution.height = 720;
     bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
@@ -52,6 +63,20 @@
     
     bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
     bgfx::setViewRect(0, 0, 0, 1280, 720);
+    
+    [self.window makeKeyAndVisible];
+    
+    bgfx::touch(0);
+    bgfx::frame();
+    
+    // 3、创建一个Vertex Buffer
+    //MTLBuffer
+    //MTLBuffer vertexBuffer;
+//    let vertexData:[Float] = [
+//                              0.0,  1.0, 0.0,
+//                              -1.0, -1.0, 0.0,
+//                              1.0, -1.0, 0.0
+//                              ]
     return YES;
 }
 
