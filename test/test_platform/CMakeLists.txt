@@ -7,7 +7,7 @@ set(CMAKE_C_COMPILER g++)
 add_compile_options(-std=c++1y)
 
 set(DIR_SRCS
-    ${SRCROOT}/main.mm
+    ${SRCROOT}/main.cpp
     ${SRCROOT}/logo.h
 )
 
