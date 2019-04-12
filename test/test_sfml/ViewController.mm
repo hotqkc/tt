@@ -5,22 +5,17 @@
 //  Created by quku on 2019/3/15.
 //  Copyright © 2019 quku. All rights reserved.
 //
-#import "CppInterface.h"
 #import "ViewController.h"
 
-@interface AAViewController ()
-{
-        CppInterface* i;
-}
+@interface ViewController ()
 
 @end
 
-@implementation AAViewController
+@implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-        i = [[CppInterface alloc]init];
 }
 
 - (void)didReceiveMemoryWarning {

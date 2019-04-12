@@ -1,13 +1,13 @@
 
 
-#include <bgfx/bgfx.h>
-#include <bgfx/platform.h>
-#include <bx/bx.h>
-
-//#include <SFML/Window/WindowBase.hpp>
-//#include <SFML/Config.hpp>
-//#include <SFML/Main.hpp>
-//#include <SFML/Window/Event.hpp>
+//#include <bgfx/bgfx.h>
+//#include <bgfx/platform.h>
+//#include <bx/bx.h>
+//
+////#include <SFML/Window/WindowBase.hpp>
+////#include <SFML/Config.hpp>
+////#include <SFML/Main.hpp>
+////#include <SFML/Window/Event.hpp>
 
 #define SC_WIDTH 1334
 #define SC_HEIGHT 750

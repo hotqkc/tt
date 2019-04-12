@@ -11,7 +11,6 @@
 #include "bx/bx.h"
 
 #import "AppDelegate.h"
-#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,24 +21,25 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]bounds]];
-    AAViewController *vc = [[AAViewController alloc]initWithNibName:@"AAViewController" bundle:nil];
-    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:vc];
-    self.window.rootViewController = navi;
-    
+    self.window = [[UIWindow alloc] initWithFrame:
+                   [[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+    self.vc = [[ViewController alloc]init];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:self.vc];
+    [self.window setRootViewController:nav];
+    
     [self.window makeKeyAndVisible];
-//    UIWindow *window = ((AppDelegate*)([UIApplication sharedApplication].delegate)).window;
-//    bgfx::PlatformData pd;
-//    pd.nwh = (__bridge void *)window;
-//    bgfx::setPlatformData(pd);
-//    
-//    bgfx::Init bgfxInit;
-//    bgfxInit.type = bgfx::RendererType::Count; // Automatically choose a renderer.
-//    bgfxInit.resolution.width = 1280;
-//    bgfxInit.resolution.height = 720;
-//    bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
-    //bgfx::init(bgfxInit);
+
+    bgfx::PlatformData pd;
+    pd.nwh = (__bridge void *)self.window;
+    bgfx::setPlatformData(pd);
+
+    bgfx::Init bgfxInit;
+    bgfxInit.type = bgfx::RendererType::Count; // Automatically choose a renderer.
+    bgfxInit.resolution.width = 1280;
+    bgfxInit.resolution.height = 720;
+    bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
+    bgfx::init(bgfxInit);
     return YES;
 }
 
