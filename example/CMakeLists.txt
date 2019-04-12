@@ -42,6 +42,7 @@ endif()
 
 if(SXB_OS_IOS)
 	add_subdirectory("eg_ios_00-HelloWorld")
+	add_subdirectory("eg_ios_00-HelloBGFX")
 else()
 	add_subdirectory("example_00-HelloBGFX")
 	add_subdirectory("example_00-HelloWorld")
