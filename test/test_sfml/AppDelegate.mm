@@ -10,8 +10,6 @@
 #include "bgfx/platform.h"
 #include "bx/bx.h"
 
-#import <Metal/MTLBuffer.h>
-
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -55,28 +53,20 @@
 
     bgfx::Init bgfxInit;
     bgfxInit.type = bgfx::RendererType::Metal; // Automatically choose a renderer.
-    bgfxInit.resolution.width = 1280;
-    bgfxInit.resolution.height = 720;
+//    bgfxInit.resolution.width = 1280;
+//    bgfxInit.resolution.height = 720;
     bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
     bgfx::init(bgfxInit);
     bgfx::setDebug(BGFX_DEBUG_TEXT);
     
     bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
-    bgfx::setViewRect(0, 0, 0, 1280, 720);
+//    bgfx::setViewRect(0, 0, 0, 1280, 720);
     
     [self.window makeKeyAndVisible];
     
     bgfx::touch(0);
     bgfx::frame();
     
-    // 3、创建一个Vertex Buffer
-    //MTLBuffer
-    //MTLBuffer vertexBuffer;
-//    let vertexData:[Float] = [
-//                              0.0,  1.0, 0.0,
-//                              -1.0, -1.0, 0.0,
-//                              1.0, -1.0, 0.0
-//                              ]
     return YES;
 }
 
