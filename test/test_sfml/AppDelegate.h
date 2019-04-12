@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <UIKit/UIApplication.h> // UIApplicationDelegate
+
+#import <QuartzCore/CAMetalLayer.h>
+#import <Metal/Metal.h>
+#import <MetalKit/MetalKit.h>
+
 #include "ViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

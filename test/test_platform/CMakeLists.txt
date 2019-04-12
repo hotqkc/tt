@@ -8,6 +8,7 @@ add_compile_options(-std=c++1y)
 
 set(DIR_SRCS
     ${SRCROOT}/main.mm
+    ${SRCROOT}/logo.h
 )
 
 set(INC_DIR
