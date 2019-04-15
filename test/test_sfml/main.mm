@@ -13,8 +13,8 @@
 
 #include "logo.h"
 
-#define CUR_WIDTH       640
-#define CUR_HEIGHT      1136
+#define CUR_WIDTH       1136
+#define CUR_HEIGHT      640
 
 // Please set platform data window to a CAMetalLayer
 int main(int argc, char *argv[])
