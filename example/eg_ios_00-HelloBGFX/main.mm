@@ -4,15 +4,29 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Main.hpp>
 
+#import <UIKit/UIKit.h>
+
 #include "cube.h"
 
 int main(int argc, char *argv[])
  {
      // Create the main window
      sf::WindowBase window(sf::VideoMode(WNDW_WIDTH, WNDW_HEIGHT), "SFML window");
+//     NSString *resourceBundle = [[NSBundle mainBundle] pathForResource:@"MetalShaders" ofType:@"xcassets"];
+//         NSLog(@"resourceBundle: %@", resourceBundle);
+//         NSString *earth = [[NSBundlebundleWithPath:resourceBundle] pathForResource:@"Matthijs"ofType:@"jpg"inDirectory:@"Images/MoreImages"];
+//
+//         NSLog(@"path: %@", earth);
 
+     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ "Settings" ofType :@ "bundle"];
+     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+     
+    //NSString *imagePath = [bundle pathForResource:@"0002" ofType:@"JPG"];
+    //UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imagePath]];
+   // [self.view addSubview:imageView];
+     
 	 Cube exampleCube;
-	 exampleCube.init(window.getSystemHandle());
+	 exampleCube.init(window.getMetalHandle());
 
 	 uint64_t counter = 0;
 

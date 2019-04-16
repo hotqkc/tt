@@ -48,9 +48,9 @@ endif()
 add_subdirectory("src")
 add_subdirectory("example")
 
-if(SXB_TEST)
+#if(SXB_TEST)
 	add_subdirectory("test")
-endif()
+	#endif()
 
 set(CPACK_PACKAGE_DIRECTORY ${CMAKE_ROOT_DIR}/pack)
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_ROOT_DIR}/LICENSE")
