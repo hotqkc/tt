@@ -11,10 +11,24 @@
 
 #include <SFML/Main.hpp>
 
+#import <UIKit/UIKit.h>
+#import <mach/mach.h>
+
 #include "logo.h"
 
 #define CUR_WIDTH       1136
 #define CUR_HEIGHT      640
+
+inline bool getMem(double &residentMem_, double &virtualMem_)
+{
+    task_basic_info_data_t taskInfo;
+    mach_msg_type_number_t infoCount = TASK_BASIC_INFO_COUNT;
+    kern_return_t kernReturn = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)&taskInfo, &infoCount);
+    residentMem_ = taskInfo.resident_size / 1024.0 / 1024.0;
+    virtualMem_ = taskInfo.virtual_size / 1024.0 / 1024.0;
+    
+    return kernReturn == KERN_SUCCESS;
+}
 
 // Please set platform data window to a CAMetalLayer
 int main(int argc, char *argv[])
@@ -45,6 +59,9 @@ int main(int argc, char *argv[])
     int resize_width = 0;
     int resize_height = 0;
     
+    double residentMem = 0;
+    double virtualMem = 0;
+
     // Start the game loop
     while (window.isOpen())
     {
@@ -62,6 +79,8 @@ int main(int argc, char *argv[])
             else if (event.type == sf::Event::Resized)
                 resize_width = event.size.width, resize_height = event.size.height;
         }
+        
+        getMem(residentMem, virtualMem);
         
         resize_width = window.getSize().x;
         resize_height = window.getSize().y;
@@ -86,9 +105,11 @@ int main(int argc, char *argv[])
         bgfx::dbgTextPrintf(0, 5, 0x0f, "                                    ");
         bgfx::dbgTextPrintf(0, 7, 0x0f, "                                    ");
         bgfx::dbgTextPrintf(0, 9, 0x0f, "                                    ");
+        bgfx::dbgTextPrintf(0, 11, 0x0f, "                                    ");
         bgfx::dbgTextPrintf(0, 5, 0x0f, "%d", count);
         bgfx::dbgTextPrintf(0, 7, 0x0f, "mouse: (%d, %d)", mouse_x, mouse_y);
         bgfx::dbgTextPrintf(0, 9, 0x0f, "resize: (%d, %d)", resize_width, resize_height);
+        bgfx::dbgTextPrintf(0, 11, 0x0f, "mem(resident,virtual): (%.3fk, %.3fk)", residentMem, virtualMem);
         
         const bgfx::Stats* stats = bgfx::getStats();
         bgfx::dbgTextPrintf(0, 2, 0x0f, "Backbuffer %dW x %dH in pixels, debug text %dW x %dH in characters."
