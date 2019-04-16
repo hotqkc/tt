@@ -18,9 +18,9 @@
 //#define IS_IPHONE_4     (IS_IPHONE && (VERTICAL_SCREEN_HEIGHT == 480.f))
 //
 
-#include "bgfx/bgfx.h"
-#include "bgfx/platform.h"
-#include "bx/bx.h"
+//#include "bgfx/bgfx.h"
+//#include "bgfx/platform.h"
+//#include "bx/bx.h"
 
 #import "AppDelegate.h"
 
@@ -42,7 +42,7 @@
 //    self.window = [[UIWindow alloc] initWithFrame:
 //                   [[UIScreen mainScreen] bounds]];
     self.window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
-    CGRect tmpR = [[UIScreen mainScreen]bounds];
+    //CGRect tmpR = [[UIScreen mainScreen]bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     self.vc = [[ViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:self.vc];
