@@ -20,9 +20,13 @@ bx::AllocatorI*  getAllocator();
 class Utils
 {
 public:
-	static bool loadShader(const char *FILENAME, ::bgfx::ShaderHandle & sh_);
+    static bool loadShader(const char *FILENAME, ::bgfx::ShaderHandle & sh_);
+    
+    static bool loadShader_FullPath(const char *FILENAME, ::bgfx::ShaderHandle & sh_);
 
-	static bool loadProgram(const char* vsName_, const char* fsName_, ::bgfx::ProgramHandle & ph_);
+    static bool loadProgram(const char* vsName_, const char* fsName_, ::bgfx::ProgramHandle & ph_);
+    
+    static bool loadProgram_FullPath(const char* vsName_, const char* fsName_, ::bgfx::ProgramHandle & ph_);
 
 	static bool loadTexture(
 		const char* name_, 

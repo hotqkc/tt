@@ -3,45 +3,45 @@
 #include <bx/bx.h>
 #include <bx/math.h>
 
+#include <string>
+
 #include <sxbCommon/utils.h>
 
 #include "cube.h"
 
-bool Cube::init(void* nwh_)
+bool Cube::init(void *nwh_, const char *runtimePrefix_)
 {
-	bgfx::PlatformData pd;
-	pd.nwh = nwh_;
-	bgfx::setPlatformData(pd);
-
-	bgfx::Init bgfxInit;
-	bgfxInit.type = bgfx::RendererType::Count; // Automatically choose a renderer.
-	bgfxInit.resolution.width = WNDW_WIDTH;
-	bgfxInit.resolution.height = WNDW_HEIGHT;
-	bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
-	bgfx::init(bgfxInit);
-
-	bgfx::setDebug(BGFX_DEBUG_TEXT);
-
-	bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
-	bgfx::setViewRect(0, 0, 0, WNDW_WIDTH, WNDW_HEIGHT);
-
-	bgfx::VertexDecl pcvDecl;
-	pcvDecl.begin()
-		.add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
-		.add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
-		.end();
-	m_vbh = bgfx::createVertexBuffer(bgfx::makeRef(cubeVertices, sizeof(cubeVertices)), pcvDecl);
-	m_ibh = bgfx::createIndexBuffer(bgfx::makeRef(cubeTriList, sizeof(cubeTriList)));
-
-	bgfx::ShaderHandle vsh, fsh;
-
-	if (sxb::Utils::loadShader("vs_cubes.bin", vsh) && sxb::Utils::loadShader("fs_cubes.bin", fsh))
-	{
-		m_ready = true;
-		m_program = bgfx::createProgram(vsh, fsh, true);
-	}
-
-	return m_ready;
+    std::string vsStr = runtimePrefix_; vsStr += "vs_cubes.bin";
+    std::string fsStr = runtimePrefix_; fsStr += "fs_cubes.bin";
+    bgfx::PlatformData pd;
+    pd.nwh = nwh_;
+    bgfx::setPlatformData(pd);
+    
+    bgfx::Init bgfxInit;
+    bgfxInit.type = bgfx::RendererType::Count; // Automatically choose a renderer.
+    bgfxInit.resolution.width = WNDW_WIDTH;
+    bgfxInit.resolution.height = WNDW_HEIGHT;
+    bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
+    bgfx::init(bgfxInit);
+    
+    bgfx::setDebug(BGFX_DEBUG_TEXT);
+    
+    bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
+    bgfx::setViewRect(0, 0, 0, WNDW_WIDTH, WNDW_HEIGHT);
+    
+    bgfx::VertexDecl pcvDecl;
+    pcvDecl.begin()
+    .add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+    .add(bgfx::Attrib::Color0, 4, bgfx::AttribType::Uint8, true)
+    .end();
+    m_vbh = bgfx::createVertexBuffer(bgfx::makeRef(cubeVertices, sizeof(cubeVertices)), pcvDecl);
+    m_ibh = bgfx::createIndexBuffer(bgfx::makeRef(cubeTriList, sizeof(cubeTriList)));
+    
+    bgfx::ShaderHandle vsh, fsh;
+    
+    m_ready = sxb::Utils::loadProgram_FullPath(vsStr.c_str(), fsStr.c_str(), m_program);
+    
+    return m_ready;
 }
 
 void Cube::update(const uint64_t & frame_)

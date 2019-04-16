@@ -58,7 +58,7 @@ public:
 	};
 
 public:
-	bool init(void* nwh_);
+	bool init(void* nwh_, const char *runtimePrefix_ = "");
 
 	void update(const uint64_t & frame_ = 0);
 

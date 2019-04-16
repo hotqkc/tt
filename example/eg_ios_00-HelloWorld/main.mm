@@ -61,6 +61,10 @@ int main(int argc, char *argv[])
     
     double residentMem = 0;
     double virtualMem = 0;
+    
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ "Settings" ofType :@ "bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString *path = [resourceBundle pathForResource :@"vs_cubes.bin" ofType :@""];
 
     // Start the game loop
     while (window.isOpen())

@@ -125,6 +125,35 @@ bool Utils::loadProgram(const char* vsName_, const char* fsName_, bgfx::ProgramH
 	return Result;
 }
 
+bool Utils::loadProgram_FullPath(const char* vsName_, const char* fsName_, bgfx::ProgramHandle & ph_)
+{
+    bool Result = false;
+    bgfx::ShaderHandle vsh, fsh;
+    
+    if (loadShader(vsName_, vsh) && loadShader(fsName_, fsh))
+    {
+        Result = true;
+        ph_ = bgfx::createProgram(vsh, fsh, true);
+    }
+    
+    return Result;
+}
+
+bool Utils::loadShader_FullPath(const char *FILENAME, bgfx::ShaderHandle & sh_)
+{
+    bool Result = false;
+    
+    const ::bgfx::Memory *mem = loadMem("", FILENAME);
+    
+    if (mem)
+    {
+        Result = true;
+        sh_ = ::bgfx::createShader(mem);
+    }
+    
+    return Result;
+}
+
 void Utils::imageReleaseCb(void* ptr_, void* userData_)
 {
 	BX_UNUSED(ptr_);
