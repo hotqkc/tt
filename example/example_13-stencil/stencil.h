@@ -11,8 +11,6 @@
 #include <sxbCommon/defines.h>
 #include <sxbCommon/Mesh.h>
 
-#include "info.h"
-
 class stencil
 {
 public:
@@ -54,6 +52,7 @@ private:
     double m_residentMem;
     double m_virtualMem;
     
+    bgfx::UniformHandle m_texColor;
 //    ClearValues m_clearValues;
 };
 
