@@ -40,12 +40,16 @@ int main(int argc, char *argv[])
     pd.nwh = window.getMetalHandle();
     bgfx::setPlatformData(pd);
     
+    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ "Settings" ofType :@ "bundle"];
+    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+    NSString *path = [resourceBundle pathForResource :@"vs_cubes.bin" ofType :@""];
+    
     bgfx::Init bgfxInit;
     bgfxInit.type = bgfx::RendererType::Count; // Automatically choose a renderer.
     bgfxInit.resolution.width = CUR_WIDTH;
     bgfxInit.resolution.height = CUR_HEIGHT;
     bgfxInit.resolution.reset = BGFX_RESET_VSYNC;
-    bgfx::init(bgfxInit);
+    bgfx::init(bgfxInit, bundlePath);
     
     bgfx::setDebug(BGFX_DEBUG_TEXT);
     
@@ -61,10 +65,6 @@ int main(int argc, char *argv[])
     
     double residentMem = 0;
     double virtualMem = 0;
-    
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ "Settings" ofType :@ "bundle"];
-    NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
-    NSString *path = [resourceBundle pathForResource :@"vs_cubes.bin" ofType :@""];
 
     // Start the game loop
     while (window.isOpen())
@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
         bgfx::dbgTextPrintf(0, 5, 0x0f, "%d", count);
         bgfx::dbgTextPrintf(0, 7, 0x0f, "mouse: (%d, %d)", mouse_x, mouse_y);
         bgfx::dbgTextPrintf(0, 9, 0x0f, "resize: (%d, %d)", resize_width, resize_height);
-        bgfx::dbgTextPrintf(0, 11, 0x0f, "mem(resident,virtual): (%.3fk, %.3fk)", residentMem, virtualMem);
+        bgfx::dbgTextPrintf(0, 11, 0x0f, "mem(resident,virtual): (%.3fm, %.3fm)", residentMem, virtualMem);
         
         const bgfx::Stats* stats = bgfx::getStats();
         bgfx::dbgTextPrintf(0, 2, 0x0f, "Backbuffer %dW x %dH in pixels, debug text %dW x %dH in characters."

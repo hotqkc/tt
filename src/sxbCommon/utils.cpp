@@ -130,7 +130,7 @@ bool Utils::loadProgram_FullPath(const char* vsName_, const char* fsName_, bgfx:
     bool Result = false;
     bgfx::ShaderHandle vsh, fsh;
     
-    if (loadShader(vsName_, vsh) && loadShader(fsName_, fsh))
+    if (loadShader_FullPath(vsName_, vsh) && loadShader_FullPath(fsName_, fsh))
     {
         Result = true;
         ph_ = bgfx::createProgram(vsh, fsh, true);

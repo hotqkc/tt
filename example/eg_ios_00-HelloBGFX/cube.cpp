@@ -7,12 +7,25 @@
 
 #include <sxbCommon/utils.h>
 
+#import <mach/mach.h>
+
 #include "cube.h"
+
+inline bool getMem(double &residentMem_, double &virtualMem_)
+{
+    task_basic_info_data_t taskInfo;
+    mach_msg_type_number_t infoCount = TASK_BASIC_INFO_COUNT;
+    kern_return_t kernReturn = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)&taskInfo, &infoCount);
+    residentMem_ = taskInfo.resident_size / 1024.0 / 1024.0;
+    virtualMem_ = taskInfo.virtual_size / 1024.0 / 1024.0;
+    
+    return kernReturn == KERN_SUCCESS;
+}
 
 bool Cube::init(void *nwh_, const char *runtimePrefix_)
 {
-    std::string vsStr = runtimePrefix_; vsStr += "vs_cubes.bin";
-    std::string fsStr = runtimePrefix_; fsStr += "fs_cubes.bin";
+    std::string vsStr = runtimePrefix_; vsStr += "/vs_cubes.bin";
+    std::string fsStr = runtimePrefix_; fsStr += "/fs_cubes.bin";
     bgfx::PlatformData pd;
     pd.nwh = nwh_;
     bgfx::setPlatformData(pd);
@@ -41,6 +54,8 @@ bool Cube::init(void *nwh_, const char *runtimePrefix_)
     
     m_ready = sxb::Utils::loadProgram_FullPath(vsStr.c_str(), fsStr.c_str(), m_program);
     
+
+    
     return m_ready;
 }
 
@@ -49,6 +64,12 @@ void Cube::update(const uint64_t & frame_)
 	if (m_ready)
 	{
 		bgfx::touch(0);
+        getMem(m_residentMem, m_virtualMem);
+        
+        bgfx::dbgTextPrintf(0, 5, 0x0f, "                                    ");
+        bgfx::dbgTextPrintf(0, 7, 0x0f, "                                    ");
+        bgfx::dbgTextPrintf(0, 5, 0x0f, "%d", frame_);
+        bgfx::dbgTextPrintf(0, 7, 0x0f, "mem(resident,virtual): (%.3fm, %.3fm)", m_residentMem, m_virtualMem);
 
 		const bx::Vec3 at = { 0.0f, 0.0f,  0.0f };
 		const bx::Vec3 eye = { 0.0f, 0.0f, -5.0f };

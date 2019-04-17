@@ -19,14 +19,15 @@ int main(int argc, char *argv[])
 //         NSLog(@"path: %@", earth);
 
      NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ "Settings" ofType :@ "bundle"];
-     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
+//     NSString *path = [resourceBundle pathForResource :@"vs_cubes.bin" ofType :@""];
      
     //NSString *imagePath = [bundle pathForResource:@"0002" ofType:@"JPG"];
     //UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imagePath]];
    // [self.view addSubview:imageView];
      
 	 Cube exampleCube;
-	 exampleCube.init(window.getMetalHandle());
+	 exampleCube.init(window.getMetalHandle(), [bundlePath UTF8String]);
 
 	 uint64_t counter = 0;
 
