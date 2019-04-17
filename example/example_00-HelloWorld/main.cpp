@@ -8,7 +8,7 @@
 #include <bx/bx.h>
 
 #include <sxbCommon/defines.h>
-#include <sxbCommon/platformUtils.h>
+#include <sxbCommon/utils.h>
 
 #include <SFML/Main.hpp>
 
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
                 resize_width = event.size.width, resize_height = event.size.height;
         }
         
-        sxb::PlatformUtils::getMem(residentMem, virtualMem);
+        sxb::Utils::getMem(residentMem, virtualMem);
         
         resize_width = window.getSize().x;
         resize_height = window.getSize().y;

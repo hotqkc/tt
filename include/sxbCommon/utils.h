@@ -9,6 +9,8 @@
 #include <bgfx/bgfx.h>
 #include <bimg/bimg.h>
 
+#include <string>
+
 #include "sxbCommon/defines.h"
 
 SXB_NAMESPACE_BEGIN
@@ -40,7 +42,13 @@ public:
 	static void unload(void* ptr_);
 	
 	static void imageReleaseCb(void* ptr_, void* userData_);
-
+    
+public:
+    // different platform
+    static const std::string & getRuntimeDirectory();
+    
+    static bool getMem(double &residentMem_, double &virtualMem_);
+    
 private:
 	Utils() {};
 	~Utils() 
@@ -51,6 +59,10 @@ private:
 		//BX_DELETE(g_allocator, s_fileWriter);
 		//s_fileWriter = NULL;
 	};
+    
+private:
+    // different platform
+    static std::string s_runtimeDirectory;
 };
 
 SXB_NAMESPACE_END

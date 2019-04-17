@@ -14,16 +14,15 @@ set(DIR_SRCS
 			${SRCROOT}/utils.cpp
 			${INCROOT}/Mesh.h
 			${SRCROOT}/Mesh.cpp
-			${INCROOT}/platformUtils.h
 )
 
 if(SXB_OS_IOS)
 	set(DIR_SRCS ${DIR_SRCS}
-		${SRCROOT}/platformUtils.mm
+		${SRCROOT}/utils_p.mm
 	)
 else()
 	set(DIR_SRCS ${DIR_SRCS}
-		${SRCROOT}/platformUtils.cpp
+		${SRCROOT}/utils_p.cpp
 	)
 endif()
 			

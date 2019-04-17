@@ -2,26 +2,29 @@
 #import <UIKit/UIKit.h>
 #import <mach/mach.h>
 
-#include "sxbCommon/platformUtils.h"
+#include "sxbCommon/utils.h"
 
 SXB_NAMESPACE_BEGIN
 
-std::string PlatformUtils::s_runtimeDirectory = "../../../runtime";
+std::string Utils::s_runtimeDirectory = "";
 
-const std::string & PlatformUtils::getRuntimeDirectory()
+const std::string & Utils::getRuntimeDirectory()
 {
 #if defined(SXB_SYSTEM_IOS)
-    NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ "runtime" ofType :@ "bundle"];
-    if (bundlePath)
+    if (s_runtimeDirectory.empty())
     {
-        s_runtimeDirectory = [bundlePath UTF8String];
+        NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ "runtime" ofType :@ "bundle"];
+        if (bundlePath)
+        {
+            s_runtimeDirectory = [bundlePath UTF8String];
+        }
     }
     
 #endif
     return s_runtimeDirectory;
 }
 
-bool PlatformUtils::getMem(double &residentMem_, double &virtualMem_)
+bool Utils::getMem(double &residentMem_, double &virtualMem_)
 {
     task_basic_info_data_t taskInfo;
     mach_msg_type_number_t infoCount = TASK_BASIC_INFO_COUNT;

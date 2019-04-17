@@ -6,7 +6,6 @@
 #include <string>
 
 #include <sxbCommon/utils.h>
-#include <sxbCommon/platformUtils.h>
 
 #include "cube.h"
 
@@ -48,7 +47,7 @@ void Cube::update(const uint64_t & frame_)
 	if (m_ready)
 	{
 		bgfx::touch(0);
-        sxb::PlatformUtils::getMem(m_residentMem, m_virtualMem);
+        sxb::Utils::getMem(m_residentMem, m_virtualMem);
         
         bgfx::dbgTextPrintf(0, 5, 0x0f, "                                    ");
         bgfx::dbgTextPrintf(0, 7, 0x0f, "                                    ");

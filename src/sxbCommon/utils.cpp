@@ -8,8 +8,6 @@
 
 #include <bimg/decode.h>
 
-#include "sxbCommon/platformUtils.h"
-
 #include "sxbCommon/utils.h"
 
 SXB_NAMESPACE_BEGIN
@@ -30,7 +28,8 @@ class FileReader : public bx::FileReader
 public:
 	virtual bool open(const bx::FilePath& _filePath, bx::Error* _err) override
 	{
-        s_currentDir.set(PlatformUtils::getRuntimeDirectory().c_str());
+        
+        s_currentDir.set(Utils::getRuntimeDirectory().c_str());
 		String filePath(s_currentDir);
 		filePath.append(_filePath);
 		return super::open(filePath.getPtr(), _err);
@@ -44,7 +43,7 @@ class FileWriter : public bx::FileWriter
 public:
 	virtual bool open(const bx::FilePath& _filePath, bool _append, bx::Error* _err) override
 	{
-        s_currentDir.set(PlatformUtils::getRuntimeDirectory().c_str());
+        s_currentDir.set(Utils::getRuntimeDirectory().c_str());
 		String filePath(s_currentDir);
 		filePath.append(_filePath);
 		return super::open(filePath.getPtr(), _append, _err);
@@ -88,7 +87,7 @@ bool Utils::loadShader(const char *FILENAME, bgfx::ShaderHandle & sh_)
 {
 	bool Result = false;
 
-	std::string shaderPath = PlatformUtils::getRuntimeDirectory();
+	std::string shaderPath = getRuntimeDirectory();
     
 #if defined(SXB_SYSTEM_IOS)
     shaderPath += "/shaders/";
@@ -152,7 +151,7 @@ bool Utils::loadTexture(const char* name_, bgfx::TextureHandle & th_, uint64_t f
 	uint32_t size = 0;
 	void * data = nullptr;
 	
-	if (load(PlatformUtils::getRuntimeDirectory().c_str(), name_, data, size))
+	if (load(getRuntimeDirectory().c_str(), name_, data, size))
 	{
 		bimg::ImageContainer* imageContainer = bimg::imageParse(g_allocator, data, size);
 
