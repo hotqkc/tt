@@ -2,7 +2,10 @@
 #include <SFML/Config.hpp>
 #include <SFML/Window/WindowBase.hpp>
 #include <SFML/Window/Event.hpp>
-#include <SFML/Main.hpp>
+
+#if defined(SXB_SYSTEM_IOS)
+    #include <SFML/Main.hpp>
+#endif
 
 #include "cube.h"
 

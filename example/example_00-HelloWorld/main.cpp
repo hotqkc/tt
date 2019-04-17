@@ -10,7 +10,9 @@
 #include <sxbCommon/defines.h>
 #include <sxbCommon/utils.h>
 
-#include <SFML/Main.hpp>
+#if defined(SXB_SYSTEM_IOS)
+    #include <SFML/Main.hpp>
+#endif
 
 #include "logo.h"
 
