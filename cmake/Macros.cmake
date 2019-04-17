@@ -70,6 +70,12 @@ macro(sxb_add_executable target)
     		MACOSX_BUNDLE YES 
     		RESOURCE "${BUNDLE_SRCS}"
 		)
+		set_target_properties(
+			${target}
+			PROPERTIES 
+			XCODE_ATTRIBUTE_ASSETCATALOG_COMPILER_APPICON_NAME "AppIcon"
+			XCODE_ATTRIBUTE_ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME "LaunchImage"
+		)
 	else()
 		add_executable(${target} ${THIS_SOURCES})
 	endif()
