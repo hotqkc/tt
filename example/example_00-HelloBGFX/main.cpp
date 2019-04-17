@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
      sf::WindowBase window(sf::VideoMode(WNDW_WIDTH, WNDW_HEIGHT), "SFML window");
 
 	 Cube exampleCube;
-	 exampleCube.init(window.getMetalHandle());
+	 exampleCube.init(window.getWindowHandle());
 
 	 uint64_t counter = 0;
 

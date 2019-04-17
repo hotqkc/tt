@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
      // Create the main window
      sf::WindowBase window(sf::VideoMode(WNDW_WIDTH, WNDW_HEIGHT), "SFML window");
 	 stencil exampleStencil;
-	 exampleStencil.init(window.getMetalHandle());
+	 exampleStencil.init(window.getWindowHandle());
 
 	 uint64_t count = 0;
 

@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
      // Create the main window
      sf::WindowBase window(sf::VideoMode(WNDW_WIDTH, WNDW_HEIGHT), "SFML window");
 	 lod exampleLod;
-	 exampleLod.init(window.getMetalHandle());
+	 exampleLod.init(window.getWindowHandle());
 
 	 uint64_t count = 0;
 

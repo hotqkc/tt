@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     sf::WindowBase window(sf::VideoMode(CUR_WIDTH, CUR_HEIGHT), "SFML window");
     
     bgfx::PlatformData pd;
-    pd.nwh = window.getMetalHandle();
+    pd.nwh = window.getWindowHandle();
     bgfx::setPlatformData(pd);
     
     bgfx::Init bgfxInit;
