@@ -26,7 +26,7 @@ macro(sxb_add_library target)
 	
 	SET(LIBRARY_OUTPUT_PATH ${LIB_PATH})
 
-    if (THIS_SHARED)
+	if (THIS_SHARED)
         add_library(${target} SHARED ${THIS_SOURCES})
     else()
         add_library(${target} ${THIS_SOURCES})
