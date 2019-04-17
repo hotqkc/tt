@@ -7,7 +7,7 @@
 #include <tinystl/string.h>
 namespace stl = tinystl;
 
-#include "sxbTop/defines.h"
+#include "sxbCommon/defines.h"
 
 SXB_NAMESPACE_BEGIN
 

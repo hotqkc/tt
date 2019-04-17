@@ -22,10 +22,8 @@ inline bool getMem(double &residentMem_, double &virtualMem_)
     return kernReturn == KERN_SUCCESS;
 }
 
-bool Cube::init(void *nwh_, const char *runtimePrefix_)
+bool Cube::init(void *nwh_)
 {
-    std::string vsStr = runtimePrefix_; vsStr += "/vs_cubes.bin";
-    std::string fsStr = runtimePrefix_; fsStr += "/fs_cubes.bin";
     bgfx::PlatformData pd;
     pd.nwh = nwh_;
     bgfx::setPlatformData(pd);
@@ -50,9 +48,7 @@ bool Cube::init(void *nwh_, const char *runtimePrefix_)
     m_vbh = bgfx::createVertexBuffer(bgfx::makeRef(cubeVertices, sizeof(cubeVertices)), pcvDecl);
     m_ibh = bgfx::createIndexBuffer(bgfx::makeRef(cubeTriList, sizeof(cubeTriList)));
     
-    bgfx::ShaderHandle vsh, fsh;
-    
-    m_ready = sxb::Utils::loadProgram_FullPath(vsStr.c_str(), fsStr.c_str(), m_program);
+    m_ready = sxb::Utils::loadProgram("vs_cubes.bin", "fs_cubes.bin", m_program);
     
 
     

@@ -5,7 +5,7 @@
 #include <bgfx/bgfx.h>
 #include <bx/uint32_t.h>
 
-#include <sxbTop/defines.h>
+#include <sxbCommon/defines.h>
 
 struct PosColorVertex
 {
@@ -58,7 +58,7 @@ public:
 	};
 
 public:
-	bool init(void* nwh_, const char *runtimePrefix_ = "");
+	bool init(void* nwh_);
 
 	void update(const uint64_t & frame_ = 0);
 
