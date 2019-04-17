@@ -10,11 +10,11 @@
 #include <sxbCommon/defines.h>
 #include <sxbCommon/utils.h>
 
-#if defined(SXB_SYSTEM_IOS)
-    #include <SFML/Main.hpp>
-#endif
-
 #include "logo.h"
+
+#if defined(SXB_SYSTEM_IOS)
+#include <SFML/Main.hpp>
+#endif
 
 #define CUR_WIDTH       1136
 #define CUR_HEIGHT      640

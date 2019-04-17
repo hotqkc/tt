@@ -11,6 +11,7 @@
 #if defined(SXB_SYSTEM_IOS)
     #include <SFML/Main.hpp>
 #endif
+
 int main(int argc, char *argv[])
  {
      // Create the main window

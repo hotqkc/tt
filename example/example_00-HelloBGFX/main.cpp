@@ -3,11 +3,11 @@
 #include <SFML/Window/WindowBase.hpp>
 #include <SFML/Window/Event.hpp>
 
-#if defined(SXB_SYSTEM_IOS)
-    #include <SFML/Main.hpp>
-#endif
-
 #include "cube.h"
+
+#if defined(SXB_SYSTEM_IOS)
+#include <SFML/Main.hpp>
+#endif
 
 int main(int argc, char *argv[])
  {

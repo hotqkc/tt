@@ -54,7 +54,7 @@ private:
     double m_residentMem;
     double m_virtualMem;
     
-    ClearValues m_clearValues;
+//    ClearValues m_clearValues;
 };
 
 #endif // STENCIL_H_B874E9B544F90998EF3FC1D95074912E

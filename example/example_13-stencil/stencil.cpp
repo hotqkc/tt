@@ -36,7 +36,7 @@ bool stencil::init(void* nwh_)
 
 	bgfx::setViewRect(0, 0, 0, uint16_t(m_width), uint16_t(m_height));
     
-    m_clearValues = ClearValues(0x30303000, 1.0f, 0);
+//    m_clearValues = ClearValues(0x30303000, 1.0f, 0);
     
     bgfx::VertexDecl pcvDecl;
     pcvDecl
@@ -141,9 +141,9 @@ void stencil::update(const uint64_t & frame_)
         }
         
         // Make sure at the beginning everything gets cleared.
-        clearView(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH | BGFX_CLEAR_STENCIL, m_clearValues);
+//        clearView(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH | BGFX_CLEAR_STENCIL, m_clearValues);
         bgfx::touch(0);
-        s_viewMask |= 1;
+//        s_viewMask |= 1;
         sxb::Utils::getMem(m_residentMem, m_virtualMem);
         
         bgfx::dbgTextPrintf(0, 5, 0x0f, "                                    ");
