@@ -5,7 +5,7 @@
 #include <bgfx/bgfx.h>
 #include <bx/uint32_t.h>
 
-#include <sxbTop/defines.h>
+#include <sxbCommon/defines.h>
 
 struct PosColorVertex
 {

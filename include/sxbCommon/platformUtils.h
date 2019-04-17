@@ -11,7 +11,7 @@ SXB_NAMESPACE_BEGIN
 class PlatformUtils
 {
 public:
-    static const std::string & getRuntimeDirectory();
+     static const std::string & getRuntimeDirectory();
 
 private:
 	PlatformUtils() {}

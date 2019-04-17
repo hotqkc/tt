@@ -5,7 +5,7 @@
 
 SXB_NAMESPACE_BEGIN
 
-std::string PlatformUtils::s_runtimeDirectory = "";
+std::string PlatformUtils::s_runtimeDirectory = "../../../runtime";
 
 const std::string & PlatformUtils::getRuntimeDirectory()
 {
