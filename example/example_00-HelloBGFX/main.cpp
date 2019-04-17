@@ -2,6 +2,7 @@
 #include <SFML/Config.hpp>
 #include <SFML/Window/WindowBase.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Main.hpp>
 
 #include "cube.h"
 
@@ -11,7 +12,7 @@ int main(int argc, char *argv[])
      sf::WindowBase window(sf::VideoMode(WNDW_WIDTH, WNDW_HEIGHT), "SFML window");
 
 	 Cube exampleCube;
-	 exampleCube.init(window.getSystemHandle());
+	 exampleCube.init(window.getMetalHandle());
 
 	 uint64_t counter = 0;
 

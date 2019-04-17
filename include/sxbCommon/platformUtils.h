@@ -11,7 +11,9 @@ SXB_NAMESPACE_BEGIN
 class PlatformUtils
 {
 public:
-     static const std::string & getRuntimeDirectory();
+    static const std::string & getRuntimeDirectory();
+    
+    static bool getMem(double &residentMem_, double &virtualMem_);
 
 private:
 	PlatformUtils() {}

@@ -67,6 +67,8 @@ private:
 	bgfx::ProgramHandle m_program;
 	bgfx::VertexBufferHandle m_vbh;
 	bgfx::IndexBufferHandle m_ibh;
+    double m_residentMem;
+    double m_virtualMem;
 };
 
 #endif // CUBE_H_2AA8FDAF22E7C21931959563A005530C
