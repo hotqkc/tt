@@ -8,3 +8,7 @@ if [ "$1" == "test" ] ; then
 else
 	cmakeImpl -DSXB_TEST=false
 fi
+
+if [ -d build-ios/SxB.xcodeproj ] ; then
+	open build-ios/SxB.xcodeproj
+fi
