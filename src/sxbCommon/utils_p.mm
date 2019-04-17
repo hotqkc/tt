@@ -17,6 +17,7 @@ const std::string & Utils::getRuntimeDirectory()
         if (bundlePath)
         {
             s_runtimeDirectory = [bundlePath UTF8String];
+            s_runtimeDirectory += "/";
         }
     }
     

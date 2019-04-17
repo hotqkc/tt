@@ -3,7 +3,7 @@
 
 SXB_NAMESPACE_BEGIN
 
-std::string Utils::s_runtimeDirectory = "../../../runtime";
+std::string Utils::s_runtimeDirectory = "../../../runtime/";
 
 const std::string & Utils::getRuntimeDirectory()
 {
