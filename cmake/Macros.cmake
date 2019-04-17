@@ -68,6 +68,7 @@ macro(sxb_add_executable target)
 			${target}
     		PROPERTIES
     		MACOSX_BUNDLE YES 
+			MACOSX_BUNDLE_INFO_PLIST "${CMAKE_ROOT_DIR}/ios/Info.plist"
     		RESOURCE "${BUNDLE_SRCS}"
 		)
 		set_target_properties(
@@ -75,7 +76,7 @@ macro(sxb_add_executable target)
 			PROPERTIES 
 			XCODE_ATTRIBUTE_ASSETCATALOG_COMPILER_APPICON_NAME "AppIcon"
 			XCODE_ATTRIBUTE_ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME "LaunchImage"
-			XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iOS Developer"
+			XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iPhone Developer"
 			XCODE_ATTRIBUTE_TARGETED_DEVICE_FAMILY "1"
 		)
 	else()
