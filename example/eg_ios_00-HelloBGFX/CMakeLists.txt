@@ -9,11 +9,22 @@ set(DIR_SRCS
 	${SRCROOT}/cube.cpp
 )
 
+set(RESOURCE_SRCS
+	${CMAKE_ROOT_DIR}/ios/Assets.xcassets
+	${CMAKE_ROOT_DIR}/runtime.bundle
+)
+
 Add_Definitions(-D_HAS_ITERATOR_DEBUGGING=0)
 
 sxb_add_executable(
 				${PROJECT_NAME} 
 				FOLDER "example" 
-				SOURCES ${DIR_SRCS}
+				SOURCES ${DIR_SRCS} ${RESOURCE_SRCS}
 )
 
+set_target_properties(
+	${PROJECT_NAME}
+	PROPERTIES
+	MACOSX_BUNDLE YES
+    RESOURCE "${RESOURCE_SRCS}"
+)

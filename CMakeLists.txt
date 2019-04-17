@@ -46,6 +46,10 @@ endif()
 add_subdirectory("src")
 add_subdirectory("example")
 
+#if(SXB_OS_IOS)
+	#add_subdirectory("ios")
+	#endif()
+
 if(SXB_TEST)
 	add_subdirectory("test")
 endif()

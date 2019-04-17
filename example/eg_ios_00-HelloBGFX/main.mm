@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 //
 //         NSLog(@"path: %@", earth);
 
-     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ "Settings" ofType :@ "bundle"];
+     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ "xcResource" ofType :@ "bundle"];
 //     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 //     NSString *path = [resourceBundle pathForResource :@"vs_cubes.bin" ofType :@""];
      
