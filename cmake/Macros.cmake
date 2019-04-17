@@ -57,12 +57,27 @@ macro(sxb_add_executable target)
     cmake_parse_arguments(THIS "" "" "FOLDER;SOURCES" ${ARGN})
 	
 	SET(EXECUTABLE_OUTPUT_PATH ${BIN_PATH})
-	
-	add_executable(${target} ${THIS_SOURCES})
+
+	if(SXB_OS_IOS)
+		set(BUNDLE_SRCS
+			${CMAKE_ROOT_DIR}/ios/Assets.xcassets
+			${CMAKE_ROOT_DIR}/ios/runtime.bundle
+		)
+		add_executable(${target} ${THIS_SOURCES} ${BUNDLE_SRCS})
+		set_target_properties(
+			${target}
+    		PROPERTIES
+    		MACOSX_BUNDLE YES 
+    		RESOURCE "${BUNDLE_SRCS}"
+		)
+	else()
+		add_executable(${target} ${THIS_SOURCES})
+	endif()
 
 	if (THIS_FOLDER)
 		set_target_properties(${target} PROPERTIES FOLDER ${THIS_FOLDER})
 	endif()
+
 endmacro()
 
 function(sfml_add_external)

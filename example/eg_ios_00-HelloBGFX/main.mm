@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 //
 //         NSLog(@"path: %@", earth);
 
-     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ "xcResource" ofType :@ "bundle"];
+     NSString * bundlePath = [[ NSBundle mainBundle] pathForResource: @ "runtime" ofType :@ "bundle"];
 //     NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 //     NSString *path = [resourceBundle pathForResource :@"vs_cubes.bin" ofType :@""];
      
@@ -26,8 +26,11 @@ int main(int argc, char *argv[])
     //UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imagePath]];
    // [self.view addSubview:imageView];
      
+     std::string tmpStr = [bundlePath UTF8String];
+     tmpStr += "/shaders";
+     
 	 Cube exampleCube;
-	 exampleCube.init(window.getMetalHandle(), [bundlePath UTF8String]);
+	 exampleCube.init(window.getMetalHandle(), tmpStr.c_str());
 
 	 uint64_t counter = 0;
 
