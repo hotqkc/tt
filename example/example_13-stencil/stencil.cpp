@@ -472,13 +472,13 @@ void stencil::update(const uint64_t & frame_)
         m_uniforms.m_color[3]              = m_reflectionValue;
         
         // Floor.
-//        m_hplaneMesh.submit(0
-//                            , m_programColorBlack
-//                            , floorMtx
-//                            , sxb::s_renderStates[sxb::RenderState::StencilReflection_BlendPlane]
-//                            , m_texColor
-//                            , m_uniforms
-//                            );
+        m_hplaneMesh.submit(0
+                            , m_programColorBlack
+                            , floorMtx
+                            , sxb::s_renderStates[sxb::RenderState::StencilReflection_BlendPlane]
+                            , m_texColor
+                            , m_uniforms
+                            );
         
         // Bunny and columns color.
         m_uniforms.m_color[0] = 0.70f;
