@@ -11,6 +11,14 @@
 #include <sxbCommon/defines.h>
 #include <sxbCommon/Mesh.h>
 
+struct v2
+{
+    v2():key(false),x(0),y(0){}
+    bool key;
+    int x;
+    int y;
+};
+
 class stencil
 {
 public:
@@ -20,6 +28,9 @@ public:
     , m_cursorY(0)
     , m_deltaX(0)
     , m_deltaY(0)
+    , m_sceneTime(0.0)
+    , m_at(0.0)
+    , m_eye(0.0)
     {}
     
 	~stencil()
@@ -86,6 +97,10 @@ private:
     int     m_deltaY;
     
     sxb::Uniforms m_uniforms;
+    double m_sceneTime;
+    
+    bx::Vec3    m_at;
+    bx::Vec3    m_eye;
 //    ClearValues m_clearValues;
 };
 

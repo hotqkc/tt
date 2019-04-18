@@ -19,6 +19,17 @@
 
 #define MAX_NUM_LIGHTS 5
 
+void delta2Vec3(bx::Vec3 &out_, const float &a_, const float &b_, const float &r_ = 1.0)
+{
+    out_.z = bx::sin(a_);
+    out_.x = bx::cos(a_) * bx::cos(b_);
+    out_.y = bx::cos(a_) * bx::sin(b_);
+    
+    out_.x *= r_;
+    out_.y *= r_;
+    out_.z *= r_;
+}
+
 struct PosColorVertex
 {
     float m_x;
@@ -409,6 +420,8 @@ void stencil::update(const uint64_t & frame_)
 {
 	if (m_ready)
 	{
+        
+        m_sceneTime = (float)frame_ / 30;
         // Floor position.
         float floorMtx[16];
         bx::mtxSRT(floorMtx
@@ -430,7 +443,7 @@ void stencil::update(const uint64_t & frame_)
                    , 5.0f
                    , 5.0f
                    , 0.0f
-                   , 1.56f - ((float)frame_ / 30)
+                   , 1.56f - m_sceneTime
                    , 0.0f
                    , 0.0f
                    , 2.0f
@@ -474,9 +487,9 @@ void stencil::update(const uint64_t & frame_)
                        , 0.0f
                        , 0.0f
                        , 0.0f
-                       , bx::sin(ii * 2.0f + 13.0f - ((float)frame_ / 30)) * 13.0f
+                       , bx::sin(ii * 2.0f + 13.0f - m_sceneTime) * 13.0f
                        , 4.0f
-                       , bx::cos(ii * 2.0f + 13.0f - ((float)frame_ / 30)) * 13.0f
+                       , bx::cos(ii * 2.0f + 13.0f - m_sceneTime) * 13.0f
                        );
         }
         
@@ -485,18 +498,21 @@ void stencil::update(const uint64_t & frame_)
         bgfx::touch(0);
 //        sxb::s_viewMask |= 1;
         sxb::Utils::getMem(m_residentMem, m_virtualMem);
+
+        delta2Vec3(m_eye, (float)m_deltaX / (float)50.0, (float)m_deltaY / (float)50.0, 30);
         
         bgfx::dbgTextPrintf(0, 5, 0x0f, "                                    ");
         bgfx::dbgTextPrintf(0, 7, 0x0f, "                                    ");
+        bgfx::dbgTextPrintf(0, 9, 0x0f, "                                    ");
+        bgfx::dbgTextPrintf(0, 11, 0x0f, "                                    ");
         bgfx::dbgTextPrintf(0, 5, 0x0f, "%d", frame_);
         bgfx::dbgTextPrintf(0, 7, 0x0f, "mem(resident,virtual): (%.3fm, %.3fm)", m_residentMem, m_virtualMem);
-
-		const bx::Vec3 at = { 0.0f,  0.0f,  0.0f };
-		const bx::Vec3 eye = { 10.0f,  10.0f + ( (float)m_deltaY / (float)10.0) ,  -30.0f + ( (float)m_deltaX / (float)10.0) };
+        bgfx::dbgTextPrintf(0, 9, 0x0f, "eye: (%.3f, %.3f, %.3f)", m_eye.x, m_eye.y, m_eye.z);
+        bgfx::dbgTextPrintf(0, 11, 0x0f, "del: (%.3f, %.3f)", (float)m_deltaX / (float)50.0, (float)m_deltaY / (float)50.0);
 
 		{
 			float view[16];
-			bx::mtxLookAt(view, eye, at);
+			bx::mtxLookAt(view, m_eye, m_at);
 
 			float proj[16];
 			bx::mtxProj(proj, 60.0f, float(m_width) / float(m_height), 0.1f, 100.0f, bgfx::getCaps()->homogeneousDepth);
@@ -521,16 +537,15 @@ void stencil::update(const uint64_t & frame_)
 //                            , m_texColor
 //                            , m_uniforms
 //                            );
-//        m_cubeMesh.submit(0, m_programCube, NULL, BGFX_STATE_DEFAULT);
-        
+//        m_hplaneMesh.submit(0, m_programCube, NULL, BGFX_STATE_DEFAULT);
         
         // Cubes.
         for (uint8_t ii = 0; ii < numCubes; ++ii)
         {
             m_cubeMesh.submit(0
-                              , m_programTextureLighting
+                              , m_programCube
                               , cubeMtx[ii]
-                              , sxb::s_renderStates[sxb::RenderState::ProjectionShadows_DrawAmbient]
+                              , sxb::s_renderStates[sxb::RenderState::ProjectionShadows_DrawDiffuse]
                               , m_figureTex
                               , m_texColor
                               , m_uniforms
