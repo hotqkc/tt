@@ -32,6 +32,8 @@ public:
 
 	void update(const uint64_t & frame_ = 0);
     
+    void touchBegin(const int &x_, const int &y_) {m_cursorX = x_, m_cursorY = y_;}
+    
     void setCursor(const int &x_, const int &y_)
     {
         m_deltaX += x_ - m_cursorX;
