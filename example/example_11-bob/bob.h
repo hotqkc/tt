@@ -10,6 +10,16 @@
 #include <sxbCommon/defines.h>
 #include <sxbCommon/Mesh.h>
 
+struct v2
+{
+    v2():key(false),x(0),y(0){}
+    
+    void clear(){key = false, x = 0, y = 0;}
+    bool key;
+    int x;
+    int y;
+};
+
 class Bob
 {
 public:
@@ -24,6 +34,17 @@ public:
 	bool init(void* nwh_);
 
 	void update(const uint64_t & frame_ = 0);
+    
+    void touchBegin(const int &x_, const int &y_) {m_touch.x = x_, m_touch.y = y_;}
+    
+    void touchMove(const int &x_, const int &y_)
+    {
+        m_delta.x += x_ - m_touch.x;
+        m_delta.y += y_ - m_touch.y;
+        m_touch.x = x_, m_touch.y = y_;
+    }
+    
+    void touchEnd() {m_delta.clear();}
 
 private:
 	bool m_ready;
@@ -50,6 +71,11 @@ private:
     
     double m_residentMem;
     double m_virtualMem;
+    
+    v2  m_touch;
+    v2  m_delta;
+    
+    v2  m_pos;
 };
 
 #endif // BOB_H_BED48183122980209294F0564ECA8320

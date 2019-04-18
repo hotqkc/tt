@@ -29,6 +29,12 @@ int main(int argc, char *argv[])
              // Close window: exit
              if (event.type == sf::Event::Closed)
                  window.close();
+             else if (event.type == sf::Event::TouchBegan && event.touch.finger == 0)
+                 bob.touchBegin(event.touch.x, event.touch.y);
+             else if (event.type == sf::Event::TouchMoved && event.touch.finger == 0)
+                 bob.touchMove(event.touch.x, event.touch.y);
+             else if (event.type == sf::Event::TouchEnded && event.touch.finger == 0)
+                 bob.touchEnd();
          }
 
 		 bob.update(count);

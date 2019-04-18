@@ -89,7 +89,30 @@ void Bob::update(const uint64_t & frame_)
 	if (m_ready)
 	{
 		bgfx::touch(0);
-        m_sceneTime = (float)(frame_ % 270) / 10;
+        //m_sceneTime = (float)(frame_ % 270) / 10;
+        if (m_delta.x > 30 && m_delta.x <= 60)
+        {
+            m_pos.x += 1;
+        }
+        else if (m_delta.x > 60 && m_delta.x <= 100)
+        {
+            m_pos.x += 2;
+        }
+        else if (m_delta.x > 100 && m_delta.x <= 200)
+        {
+            
+            m_pos.x += 3;
+        }
+        else if (m_delta.x > 200)
+        {
+            
+            m_pos.x += 6;
+        }
+        else if (m_delta.x < -30)
+        {
+            m_pos.x -= 1;
+        }
+        m_sceneTime = (float)(m_pos.x % 270) / 10;
         sxb::Utils::getMem(m_residentMem, m_virtualMem);
         float mountainMtx[16];
         
