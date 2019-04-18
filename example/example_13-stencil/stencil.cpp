@@ -542,13 +542,10 @@ void stencil::update(const uint64_t & frame_)
         // Cubes.
         for (uint8_t ii = 0; ii < numCubes; ++ii)
         {
-            m_cubeMesh.submit(0
-                              , m_programCube
+            m_bunnyMesh.submit(0
+                              , m_programColorLighting
                               , cubeMtx[ii]
-                              , sxb::s_renderStates[sxb::RenderState::ProjectionShadows_DrawDiffuse]
-                              , m_figureTex
-                              , m_texColor
-                              , m_uniforms
+                               , BGFX_STATE_DEFAULT
                               );
         }
         
