@@ -52,12 +52,14 @@ private:
     sxb::Mesh m_cubeMesh;
     sxb::Mesh m_hplaneMesh;
     sxb::Mesh m_vplaneMesh;
+    sxb::Mesh m_coordMesh;
 
     bgfx::ProgramHandle m_programTextureLighting;
     bgfx::ProgramHandle m_programColorLighting;
     bgfx::ProgramHandle m_programColorTexture;
     bgfx::ProgramHandle m_programColorBlack;
     bgfx::ProgramHandle m_programTexture;
+    bgfx::ProgramHandle m_programCube;
     
     bgfx::TextureHandle m_figureTex;
     bgfx::TextureHandle m_flareTex;
